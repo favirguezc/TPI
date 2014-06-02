@@ -41,6 +41,12 @@ public class LaborCulturalControl {
     }
 
     private boolean validar(LaborCultural f) {
+        if(f.getNombre() == null || 
+                f.getNombre().length() < 5)
+            return false;
+        if(f.getDescripcion() == null){
+            f.setDescripcion("");
+        }
         return true;
     }
 }
