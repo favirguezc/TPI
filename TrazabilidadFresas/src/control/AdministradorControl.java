@@ -7,6 +7,7 @@
 package control;
 
 import dao.AdministradorDAO;
+import java.util.ArrayList;
 import java.util.List;
 import modelo.Administrador;
 
@@ -49,7 +50,17 @@ public class AdministradorControl {
         return dao.readAll();
     }
 
-    private boolean validar(Administrador f) {        
+    private boolean validar(Administrador f) {    
+        if (f.getApellidos() == null
+                || f.getCedula() < 0
+                || f.getNombres() == null
+                || f.getFecha_de_nacimiento() == null
+                || f.getClave() == null) {
+            return false;
+        }
+        if (f.getAplicaciones() == null) {
+            f.setAplicaciones(new ArrayList<>());            
+        }
         return true;
     }
 }
