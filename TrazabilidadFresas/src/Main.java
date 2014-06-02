@@ -1,6 +1,8 @@
 
 import control.FresicultorControl;
+import control.LaborCulturalControl;
 import modelo.Fresicultor;
+import modelo.LaborCultural;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,8 +23,17 @@ public class Main {
 //        f.setCedula(1020794235);
 //        f.setFecha_de_nacimiento(new Date(1994, 7, 2));
 //        
-        Fresicultor f2 = new FresicultorControl().leer(1020794235);
-        System.out.println(f2.getNombres());
-        System.out.println(new FresicultorControl().leer(0));
+//        Fresicultor f2 = new FresicultorControl().leer(1020794235);
+//        System.out.println(f2.getNombres());
+//        System.out.println(new FresicultorControl().leer(0));
+        
+//        LaborCultural lc = new LaborCultural();
+//        lc.setNombre("Arrancar plantas");
+//        LaborCulturalControl lcc = new LaborCulturalControl();
+//        lcc.crear(lc);
+//        lc = new LaborCultural();
+//        lc.setNombre("Colocar plastico");
+//        lcc.crear(lc);
+//        System.out.println(lcc.leerTodos().size());
     }
 }
