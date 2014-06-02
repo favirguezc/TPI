@@ -6,6 +6,7 @@
 package control;
 
 import dao.EquipoDeAplicacionFitosanitariaDAO;
+import java.util.ArrayList;
 import java.util.List;
 import modelo.EquipoDeAplicacionFitosanitaria;
 
@@ -40,6 +41,17 @@ public class EquipoDeAplicacionFitosanitariaControl {
     }
 
     private boolean validar(EquipoDeAplicacionFitosanitaria f) {
+        if (f == null
+                || f.getNombre() == null
+                || f.getNombre().length() < 3) {
+            return false;
+        }
+        if (f.getDescripcion() == null) {
+            f.setDescripcion("");
+        }
+        if (f.getAplicaciones() == null) {
+            f.setAplicaciones(new ArrayList<>());
+        }
         return true;
     }
 }

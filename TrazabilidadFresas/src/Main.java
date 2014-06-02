@@ -1,8 +1,6 @@
 
-import control.FresicultorControl;
-import control.LaborCulturalControl;
-import modelo.Fresicultor;
-import modelo.LaborCultural;
+import control.*;
+import modelo.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -35,5 +33,6 @@ public class Main {
 //        lc.setNombre("Colocar plastico");
 //        lcc.crear(lc);
 //        System.out.println(lcc.leerTodos().size());
+        
     }
 }

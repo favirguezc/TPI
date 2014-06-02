@@ -40,6 +40,10 @@ public class EtiquetaControl {
     }
 
     private boolean validar(Etiqueta f) {
+        if (f == null
+                || f.getLote() == null) {
+            return false;
+        }
         return true;
     }
 }

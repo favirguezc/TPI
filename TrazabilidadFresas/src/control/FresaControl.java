@@ -6,6 +6,7 @@
 package control;
 
 import dao.FresaDAO;
+import java.util.ArrayList;
 import java.util.List;
 import modelo.Fresa;
 
@@ -40,6 +41,14 @@ public class FresaControl {
     }
 
     private boolean validar(Fresa f) {
+        if (f == null
+                || f.getEspecie() == null
+                || f.getEspecie().equals("")) {
+            return false;
+        }
+        if (f.getCosechas() == null) {
+            f.setCosechas(new ArrayList<>());
+        }
         return true;
     }
 }

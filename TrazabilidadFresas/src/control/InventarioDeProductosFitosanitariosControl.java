@@ -6,6 +6,7 @@
 package control;
 
 import dao.InventarioDeProductosFitosanitariosDAO;
+import java.util.Date;
 import java.util.List;
 import modelo.InventarioDeProductosFitosanitarios;
 
@@ -40,6 +41,12 @@ public class InventarioDeProductosFitosanitariosControl {
     }
 
     private boolean validar(InventarioDeProductosFitosanitarios f) {
+        if (f == null
+                || f.getCantidad() <= 0
+                || f.getProductoFitosanitario() == null
+                || f.getFecha_de_compra().after(new Date())) {
+            return false;
+        }
         return true;
     }
 }

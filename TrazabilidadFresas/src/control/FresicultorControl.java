@@ -7,6 +7,7 @@ package control;
 
 import dao.FresicultorDAO;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import modelo.Fresicultor;
 
@@ -15,23 +16,23 @@ import modelo.Fresicultor;
  * @author fredy
  */
 public class FresicultorControl {
-    
+
     FresicultorDAO dao = new FresicultorDAO();
-    
+
     public boolean crear(Fresicultor f) {
         return validar(f) && dao.create(f);
     }
-    
+
     public boolean eliminar(Fresicultor f) {
         return dao.delete(f.getId());
     }
-    
+
     public void actualizar(Fresicultor f) {
         if (validar(f)) {
             dao.update(f);
         }
     }
-    
+
     public Fresicultor leer(long id) {
         Fresicultor f = dao.read(id);
         if (f == null) {
@@ -44,20 +45,24 @@ public class FresicultorControl {
         }
         return f;
     }
-    
+
     public List<Fresicultor> leerTodos() {
         return dao.readAll();
     }
-    
-    private boolean validar(Fresicultor f) {        
-        if (f.getApellidos() == null
+
+    private boolean validar(Fresicultor f) {
+        if (f == null
+                || f.getApellidos() == null
+                || f.getApellidos().length() < 3
                 || f.getCedula() < 0
                 || f.getNombres() == null
-                || f.getFecha_de_nacimiento() == null) {
+                || f.getNombres().length() < 3
+                || f.getFecha_de_nacimiento() == null
+                || f.getFecha_de_nacimiento().after(new Date())) {
             return false;
         }
         if (f.getAplicaciones() == null) {
-            f.setAplicaciones(new ArrayList<>());            
+            f.setAplicaciones(new ArrayList<>());
         }
         if (f.getCosechas() == null) {
             f.setCosechas(new ArrayList<>());

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package control;
 
 import dao.LaborCulturalDAO;
@@ -15,7 +14,7 @@ import modelo.LaborCultural;
  * @author fredy
  */
 public class LaborCulturalControl {
-    
+
     LaborCulturalDAO dao = new LaborCulturalDAO();
 
     public boolean crear(LaborCultural f) {
@@ -41,10 +40,12 @@ public class LaborCulturalControl {
     }
 
     private boolean validar(LaborCultural f) {
-        if(f.getNombre() == null || 
-                f.getNombre().length() < 5)
+        if (f == null
+                || f.getNombre() == null
+                || f.getNombre().length() < 5) {
             return false;
-        if(f.getDescripcion() == null){
+        }
+        if (f.getDescripcion() == null) {
             f.setDescripcion("");
         }
         return true;
