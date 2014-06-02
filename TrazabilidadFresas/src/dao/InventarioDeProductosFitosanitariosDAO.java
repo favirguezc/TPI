@@ -3,30 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package dao;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.NonUniqueResultException;
-import modelo.Administrador;
+import modelo.InventarioDeProductosFitosanitarios;
 
 /**
  *
  * @author fredy
  */
-public class AdministradorDAO {
-
+public class InventarioDeProductosFitosanitariosDAO {
+    
     EntityManagerFactory emf = EntityManagerFactorySingleton.getEntityManagerFactory();
+    
+    public void create(InventarioDeProductosFitosanitarios a) {
 
-    public void create(Administrador f) {
-
-        if (read(f.getCedula()) == null) {
+        if (read(a.getId()) == null) {
             EntityManager em = emf.createEntityManager();
             em.getTransaction().begin();
             try {
-                em.persist(f);
+                em.persist(a);
                 em.getTransaction().commit();
             } catch (Exception e) {
                 em.getTransaction().rollback();
@@ -36,27 +36,12 @@ public class AdministradorDAO {
         }
     }
 
-    public Administrador read(long cedula) {
+    public InventarioDeProductosFitosanitarios read(long id) {
 
         EntityManager em = emf.createEntityManager();
-        Administrador r = null;
+        InventarioDeProductosFitosanitarios r = null;
         try {
-            r = (Administrador) em.createQuery("SELECT f FROM Administrador f WHERE f.cedula = :cedula").setParameter("cedula", cedula).getSingleResult();
-        } catch (NonUniqueResultException n) {
-            r = (Administrador) em.createQuery("SELECT f FROM Administrador f WHERE f.cedula = :cedula").setParameter("cedula", cedula).getResultList().get(0);
-        } catch (Exception e) {
-        } finally {
-            em.close();
-        }
-        return r;
-    }
-
-    private Administrador readById(long id) {
-
-        EntityManager em = emf.createEntityManager();
-        Administrador r = null;
-        try {
-            r = (Administrador) em.createQuery("SELECT f FROM Administrador f WHERE f.id = :id").setParameter("id", id).getSingleResult();
+            r = (InventarioDeProductosFitosanitarios) em.createQuery("SELECT f FROM InventarioDeProductosFitosanitarios f WHERE f.id = :id").setParameter("id", id).getSingleResult();
         } catch (Exception e) {
         } finally {
             em.close();
@@ -69,8 +54,8 @@ public class AdministradorDAO {
         EntityManager em = emf.createEntityManager();
         ArrayList r = new ArrayList();
         try {
-            r = (ArrayList) em.createQuery("SELECT f FROM Administrador f",
-                    Administrador.class).getResultList();
+            r = (ArrayList) em.createQuery("SELECT f FROM InventarioDeProductosFitosanitarios f",
+                    InventarioDeProductosFitosanitarios.class).getResultList();
         } catch (Exception e) {
         } finally {
             em.close();
@@ -78,18 +63,17 @@ public class AdministradorDAO {
         return r;
     }
 
-    public void update(Administrador i) {
+
+    public void update(InventarioDeProductosFitosanitarios i) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        Administrador f = read(i.getCedula());
+        InventarioDeProductosFitosanitarios f = read(i.getId());
         try {
-            if (f == null) {
-                f = readById(i.getId());
-            }
             if (f != null) {
-                f.setNombres(i.getNombres());
-                f.setApellidos(i.getApellidos());
-                f.setFecha_de_nacimiento(i.getFecha_de_nacimiento());
+                f.setCantidad(i.getCantidad());
+                f.setFecha_de_compra(i.getFecha_de_compra());
+                f.setPrecio(i.getPrecio());
+                f.setProductoFitosanitario(i.getProductoFitosanitario());
                 em.merge(f);
                 em.getTransaction().commit();
             }
@@ -100,10 +84,10 @@ public class AdministradorDAO {
         }
     }
 
-    public void delete(long cedula) {
+    public void delete(long id) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        Administrador r = read(cedula);
+        InventarioDeProductosFitosanitarios r = read(id);
         if (r != null) {
             try {
                 r = em.merge(r);
