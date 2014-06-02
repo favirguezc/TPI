@@ -22,7 +22,8 @@ public class Main {
 //        f.setCedula(1020794235);
 //        f.setFecha_de_nacimiento(new Date(1994, 7, 2));
 //        new FresicultorDAO().create(f);
-        //new FresicultorDAO().delete(1020794235);
-        System.out.println(new FresicultorDAO().read(1020794235).getNombres());
+//        new FresicultorDAO().delete(1020794235);
+        Fresicultor f2 = new FresicultorDAO().read(1020794235);
+        System.out.println(f2.getNombres());
     }
 }

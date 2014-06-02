@@ -51,9 +51,9 @@ public class FresicultorDAO {
         }
         return r;
     }
-    
+
     private Fresicultor readById(long id) {
-        
+
         EntityManager em = emf.createEntityManager();
         Fresicultor r = null;
         try {
@@ -78,11 +78,27 @@ public class FresicultorDAO {
         }
         return r;
     }
-    //Not working yet
-    public void update(Fresicultor i){
+
+
+    public void update(Fresicultor i) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
         Fresicultor f = read(i.getCedula());
-        if(f != null){
-            
+        try {
+            if (f == null) {
+                f = readById(i.getId());
+            }
+            if (f != null) {
+                f.setNombres(i.getNombres());
+                f.setApellidos(i.getApellidos());
+                f.setFecha_de_nacimiento(i.getFecha_de_nacimiento());
+                em.merge(f);
+                em.getTransaction().commit();
+            }
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
         }
     }
 
