@@ -51,8 +51,8 @@ public class TrampaDeInsectosControl {
     }
     
     private boolean validar(TrampaDeInsectos t) {        
-        if (t.getId() < 0
-                || t.getNombre() == null
+        if (t.getNombre() == null
+                || t.getId() < 0
                 || t.getDescripcion()== null) {
             return false;
         }

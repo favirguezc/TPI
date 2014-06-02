@@ -50,8 +50,8 @@ public class RegistroDeLaborCulturalControl {
     }
     
     private boolean validar(RegistroDeLaborCultural r) {        
-        if (r.getId() < 0
-                || r.getFecha() == null
+        if (r.getFecha() == null
+                || r.getId() < 0
                 || r.getFresicultor() == null
                 || r.getLaborCultural() == null
                 || r.getObservaciones() == null) {

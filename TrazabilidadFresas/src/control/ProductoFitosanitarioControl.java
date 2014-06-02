@@ -51,8 +51,8 @@ public class ProductoFitosanitarioControl {
     }
     
     private boolean validar(ProductoFitosanitario p) {        
-        if (p.getId() < 0
-                || p.getNombre()== null
+        if (p.getNombre()== null
+                || p.getId() < 0
                 || p.getIngrediente_activo()== null) {
             return false;
         }

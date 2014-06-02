@@ -51,9 +51,9 @@ public class ParcelaControl {
     }
     
     private boolean validar(Parcela p) {        
-        if (p.getId() < 0
+        if (p.getTipo_de_suelo() == null
                 || p.getArea()< 0.0
-                || p.getTipo_de_suelo() == null
+                || p.getId() < 0
                 || p.getUbicacion_en_la_finca() == null) {
             return false;
         }

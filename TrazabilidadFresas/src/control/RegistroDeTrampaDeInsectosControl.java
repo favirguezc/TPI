@@ -50,11 +50,11 @@ public class RegistroDeTrampaDeInsectosControl {
     }
     
     private boolean validar(RegistroDeTrampaDeInsectos r) {        
-        if (r.getId() < 0
+        if (r.getObservaciones() == null
                 || r.getEspecies_encontradas() < 0
                 || r.getFecha()< 0
                 || r.getNumero_de_individuos()< 0
-                || r.getObservaciones() == null
+                || r.getId() < 0
                 || r.getTrampaDeInsectos() == null) {
             return false;
         }

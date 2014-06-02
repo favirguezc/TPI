@@ -51,8 +51,8 @@ public class SiembraControl {
     }
     
     private boolean validar(Siembra s) {        
-        if (s.getId() < 0
-                || s.getParcela() == null) {
+        if (s.getParcela() == null
+                || s.getId() < 0) {
             return false;
         }
         if (s.getAplicaciones() == null) {

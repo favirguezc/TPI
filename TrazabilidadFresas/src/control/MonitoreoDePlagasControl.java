@@ -51,9 +51,9 @@ public class MonitoreoDePlagasControl {
     }
     
     private boolean validar(MonitoreoDePlagas m) {        
-        if (m.getId() < 0
+        if (m.getFecha() == null
                 || m.getNumero_de_planta() < 0
-                || m.getFecha() == null) {
+                || m.getId() < 0) {
             return false;
         }
         if (m.getRegistros() == null) {

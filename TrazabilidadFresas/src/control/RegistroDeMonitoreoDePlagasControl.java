@@ -50,9 +50,9 @@ public class RegistroDeMonitoreoDePlagasControl {
     }
     
     private boolean validar(RegistroDeMonitoreoDePlagas r) {        
-        if (r.getId() < 0
+        if (r.getMonitoreoDePlagas() == null
                 || r.getValoracion()< 0 //no se si valorizacion puede ser menor que cero
-                || r.getMonitoreoDePlagas() == null
+                || r.getId() < 0
                 || r.getPlaga() == null) {
             return false;
         }
