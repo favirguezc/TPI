@@ -1,6 +1,5 @@
 
-import dao.FresicultorDAO;
-import java.util.Date;
+import control.FresicultorControl;
 import modelo.Fresicultor;
 
 /*
@@ -23,8 +22,8 @@ public class Main {
 //        f.setFecha_de_nacimiento(new Date(1994, 7, 2));
 //        new FresicultorDAO().create(f);
 //        new FresicultorDAO().delete(1020794235);
-        Fresicultor f2 = new FresicultorDAO().read(1020794235);
+        Fresicultor f2 = new FresicultorControl().leer(1020794235);
         System.out.println(f2.getNombres());
-        System.out.println(new FresicultorDAO().read(0));
+        System.out.println(new FresicultorControl().leer(0));
     }
 }

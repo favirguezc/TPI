@@ -7,7 +7,6 @@ package control;
 
 import dao.FresicultorDAO;
 import java.util.List;
-import modelo.AplicacionFitosanitaria;
 import modelo.Fresicultor;
 
 /**
@@ -31,12 +30,25 @@ public class FresicultorControl {
             dao.update(f);
         }
     }
+    
+    public Fresicultor leer(long id){
+        Fresicultor f = dao.read(id);
+        if(f==null){
+            for(Fresicultor i:leerTodos()){
+                if(i.getCedula() == id){
+                    f = i;
+                    break;
+                }
+            }
+        }
+        return f;
+    }
 
-    public List leerTodos() {
+    public List<Fresicultor> leerTodos() {
         return dao.readAll();
     }
 
-    private boolean validar(Fresicultor f) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private boolean validar(Fresicultor f) {        
+        return true;
     }
 }
