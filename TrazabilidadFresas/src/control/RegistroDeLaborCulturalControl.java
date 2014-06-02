@@ -34,14 +34,6 @@ public class RegistroDeLaborCulturalControl {
     
     public RegistroDeLaborCultural leer(long id) {
         RegistroDeLaborCultural r = dao.read(id);
-        if (r == null) {
-            for (RegistroDeLaborCultural i : leerTodos()) {
-                if (i.getId() == id) {
-                    r = i;
-                    break;
-                }
-            }
-        }
         return r;
     }
     
