@@ -112,7 +112,6 @@ public class FresicultorDAO {
                 em.remove(r);
                 em.getTransaction().commit();
             } catch (Exception e) {
-                System.out.println("Paila");
             } finally {
                 em.close();
             }
