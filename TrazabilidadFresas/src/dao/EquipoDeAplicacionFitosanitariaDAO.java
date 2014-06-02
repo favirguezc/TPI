@@ -10,16 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import modelo.Etiqueta;
+import modelo.EquipoDeAplicacionFitosanitaria;
 
 /**
  *
  * @author fredy
  */
-public class EtiquetaDAO {
+public class EquipoDeAplicacionFitosanitariaDAO {
     EntityManagerFactory emf = EntityManagerFactorySingleton.getEntityManagerFactory();
     
-    public void create(Etiqueta a) {
+    public void create(EquipoDeAplicacionFitosanitaria a) {
         if (read(a.getId()) == null) {
             EntityManager em = emf.createEntityManager();
             em.getTransaction().begin();
@@ -34,11 +34,11 @@ public class EtiquetaDAO {
         }
     }
 
-    public Etiqueta read(long id) {
+    public EquipoDeAplicacionFitosanitaria read(long id) {
         EntityManager em = emf.createEntityManager();
-        Etiqueta r = null;
+        EquipoDeAplicacionFitosanitaria r = null;
         try {
-            r = (Etiqueta) em.createQuery("SELECT f FROM Etiqueta f WHERE f.id = :id").setParameter("id", id).getSingleResult();
+            r = (EquipoDeAplicacionFitosanitaria) em.createQuery("SELECT f FROM EquipoDeAplicacionFitosanitaria f WHERE f.id = :id").setParameter("id", id).getSingleResult();
         } catch (Exception e) {
         } finally {
             em.close();
@@ -50,8 +50,8 @@ public class EtiquetaDAO {
         EntityManager em = emf.createEntityManager();
         ArrayList r = new ArrayList();
         try {
-            r = (ArrayList) em.createQuery("SELECT f FROM Etiqueta f",
-                    Etiqueta.class).getResultList();
+            r = (ArrayList) em.createQuery("SELECT f FROM EquipoDeAplicacionFitosanitaria f",
+                    EquipoDeAplicacionFitosanitaria.class).getResultList();
         } catch (Exception e) {
         } finally {
             em.close();
@@ -60,13 +60,15 @@ public class EtiquetaDAO {
     }
 
 
-    public void update(Etiqueta i) {
+    public void update(EquipoDeAplicacionFitosanitaria i) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        Etiqueta f = read(i.getId());
+        EquipoDeAplicacionFitosanitaria f = read(i.getId());
         try {
             if (f != null) {
-                f.setLote(i.getLote());
+                f.setAplicaciones(i.getAplicaciones());
+                f.setDescripcion(i.getDescripcion());
+                f.setNombre(i.getNombre());
                 em.merge(f);
                 em.getTransaction().commit();
             }
@@ -80,7 +82,7 @@ public class EtiquetaDAO {
     public void delete(long id) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        Etiqueta r = read(id);
+        EquipoDeAplicacionFitosanitaria r = read(id);
         if (r != null) {
             try {
                 r = em.merge(r);
