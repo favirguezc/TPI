@@ -21,20 +21,24 @@ public class ParcelaDAO {
     
     EntityManagerFactory emf = EntityManagerFactorySingleton.getEntityManagerFactory();
 
-    public void create(Parcela p) {
+    public boolean create(Parcela p) {
 
         if (read(p.getId()) == null) {
             EntityManager em = emf.createEntityManager();
             em.getTransaction().begin();
+            boolean ret = false;
             try {
                 em.persist(p);
                 em.getTransaction().commit();
+                ret = true;
             } catch (Exception e) {
                 em.getTransaction().rollback();
             } finally {
                 em.close();
+                return ret;
             }
         }
+        return false;
     }
 
     public Parcela read(long id) {
@@ -104,19 +108,23 @@ public class ParcelaDAO {
         }
     }
 
-    public void delete(long id) {
+    public boolean delete(long id) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
+        boolean ret = false;
         Parcela r = read(id);
         if (r != null) {
             try {
                 r = em.merge(r);
                 em.remove(r);
                 em.getTransaction().commit();
+                ret = true;
             } catch (Exception e) {
             } finally {
                 em.close();
+                return ret;
             }
         }
+        return ret;
     }
 }

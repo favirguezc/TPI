@@ -21,20 +21,24 @@ public class SiembraDAO {
     
     EntityManagerFactory emf = EntityManagerFactorySingleton.getEntityManagerFactory();
 
-    public void create(Siembra s) {
+    public boolean create(Siembra s) {
 
         if (read(s.getId()) == null) {
             EntityManager em = emf.createEntityManager();
             em.getTransaction().begin();
+            boolean ret = false;
             try {
                 em.persist(s);
                 em.getTransaction().commit();
+                ret = true;
             } catch (Exception e) {
                 em.getTransaction().rollback();
             } finally {
                 em.close();
+                return ret;
             }
         }
+        return false;
     }
 
     public Siembra read(long id) {
@@ -102,19 +106,23 @@ public class SiembraDAO {
         }
     }
 
-    public void delete(long id) {
+    public boolean delete(long id) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
+        boolean ret = false;
         Siembra r = read(id);
         if (r != null) {
             try {
                 r = em.merge(r);
                 em.remove(r);
                 em.getTransaction().commit();
+                ret = true;
             } catch (Exception e) {
             } finally {
                 em.close();
+                return ret;
             }
         }
+        return ret;
     }
 }

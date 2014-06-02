@@ -21,20 +21,24 @@ public class ProductoFitosanitarioDAO {
     
     EntityManagerFactory emf = EntityManagerFactorySingleton.getEntityManagerFactory();
 
-    public void create(ProductoFitosanitario pf) {
+    public boolean create(ProductoFitosanitario pf) {
 
         if (read(pf.getId()) == null) {
             EntityManager em = emf.createEntityManager();
             em.getTransaction().begin();
+            boolean ret = false;
             try {
                 em.persist(pf);
                 em.getTransaction().commit();
+                ret = true;
             } catch (Exception e) {
                 em.getTransaction().rollback();
             } finally {
                 em.close();
+                return ret;
             }
         }
+        return false;
     }
 
     public ProductoFitosanitario read(long id) {
@@ -103,19 +107,23 @@ public class ProductoFitosanitarioDAO {
         }
     }
 
-    public void delete(long id) {
+    public boolean delete(long id) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
+        boolean ret = false;
         ProductoFitosanitario r = read(id);
         if (r != null) {
             try {
                 r = em.merge(r);
                 em.remove(r);
                 em.getTransaction().commit();
+                ret = true;
             } catch (Exception e) {
             } finally {
                 em.close();
+                return ret;
             }
         }
+        return ret;
     }
 }

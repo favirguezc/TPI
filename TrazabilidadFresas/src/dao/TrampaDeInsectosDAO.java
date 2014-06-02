@@ -22,20 +22,24 @@ public class TrampaDeInsectosDAO {
     
     EntityManagerFactory emf = EntityManagerFactorySingleton.getEntityManagerFactory();
 
-    public void create(TrampaDeInsectos t) {
+    public boolean create(TrampaDeInsectos t) {
 
         if (read(t.getId()) == null) {
             EntityManager em = emf.createEntityManager();
             em.getTransaction().begin();
+            boolean ret = false;
             try {
                 em.persist(t);
                 em.getTransaction().commit();
+                ret = true;
             } catch (Exception e) {
                 em.getTransaction().rollback();
             } finally {
                 em.close();
+                return ret;
             }
         }
+        return false;
     }
 
     public TrampaDeInsectos read(long id) {
@@ -103,19 +107,23 @@ public class TrampaDeInsectosDAO {
         }
     }
 
-    public void delete(long id) {
+    public boolean delete(long id) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
+        boolean ret = false;
         TrampaDeInsectos r = read(id);
         if (r != null) {
             try {
                 r = em.merge(r);
                 em.remove(r);
                 em.getTransaction().commit();
+                ret = true;
             } catch (Exception e) {
             } finally {
                 em.close();
+                return ret;
             }
         }
+        return ret;
     }
 }

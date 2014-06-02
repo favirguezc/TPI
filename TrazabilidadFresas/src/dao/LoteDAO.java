@@ -21,20 +21,24 @@ public class LoteDAO {
     
     EntityManagerFactory emf = EntityManagerFactorySingleton.getEntityManagerFactory();
 
-    public void create(Lote l) {
+    public boolean create(Lote l) {
 
         if (read(l.getId()) == null) {
             EntityManager em = emf.createEntityManager();
             em.getTransaction().begin();
+            boolean ret = false;
             try {
                 em.persist(l);
                 em.getTransaction().commit();
+                ret = true;
             } catch (Exception e) {
                 em.getTransaction().rollback();
             } finally {
                 em.close();
+                return ret;
             }
         }
+        return false;
     }
 
     public Lote read(long id) {
@@ -101,19 +105,23 @@ public class LoteDAO {
         }
     }
 
-    public void delete(long id) {
+    public boolean delete(long id) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
+        boolean ret = false;
         Lote r = read(id);
         if (r != null) {
             try {
                 r = em.merge(r);
                 em.remove(r);
                 em.getTransaction().commit();
+                ret = true;
             } catch (Exception e) {
             } finally {
                 em.close();
+                return ret;
             }
         }
+        return ret;
     }
 }
