@@ -19,7 +19,7 @@ import modelo.Fresicultor;
  */
 public class FresicultorDAO {
 
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("TrazabilidadFresaPU");
+    EntityManagerFactory emf = EntityManagerFactorySingleton.getEntityManagerFactory();
 
     public void create(Fresicultor f) {
 

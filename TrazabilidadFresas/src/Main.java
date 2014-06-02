@@ -25,5 +25,6 @@ public class Main {
 //        new FresicultorDAO().delete(1020794235);
         Fresicultor f2 = new FresicultorDAO().read(1020794235);
         System.out.println(f2.getNombres());
+        System.out.println(new FresicultorDAO().read(0));
     }
 }
