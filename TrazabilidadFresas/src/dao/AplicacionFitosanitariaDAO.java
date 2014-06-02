@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package dao;
 
 import java.util.ArrayList;
@@ -18,26 +17,30 @@ import modelo.AplicacionFitosanitaria;
  * @author fredy
  */
 public class AplicacionFitosanitariaDAO {
-    EntityManagerFactory emf = EntityManagerFactorySingleton.getEntityManagerFactory();
-    
-    public void create(AplicacionFitosanitaria a) {
 
+    EntityManagerFactory emf = EntityManagerFactorySingleton.getEntityManagerFactory();
+
+    public boolean create(AplicacionFitosanitaria a) {
         if (read(a.getId()) == null) {
             EntityManager em = emf.createEntityManager();
             em.getTransaction().begin();
+            boolean ok = false;
             try {
                 em.persist(a);
                 em.getTransaction().commit();
+                ok = true;
             } catch (Exception e) {
                 em.getTransaction().rollback();
+                ok = false;
             } finally {
                 em.close();
             }
+            return ok;
         }
+        return false;
     }
 
     public AplicacionFitosanitaria read(long id) {
-
         EntityManager em = emf.createEntityManager();
         AplicacionFitosanitaria r = null;
         try {
@@ -62,7 +65,6 @@ public class AplicacionFitosanitariaDAO {
         }
         return r;
     }
-
 
     public void update(AplicacionFitosanitaria i) {
         EntityManager em = emf.createEntityManager();
@@ -97,7 +99,7 @@ public class AplicacionFitosanitariaDAO {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         AplicacionFitosanitaria r = read(id);
-        boolean ok = false; 
+        boolean ok = false;
         if (r != null) {
             try {
                 r = em.merge(r);

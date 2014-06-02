@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package dao;
 
 import java.util.ArrayList;
@@ -17,23 +16,28 @@ import modelo.InventarioDeProductosFitosanitarios;
  * @author fredy
  */
 public class InventarioDeProductosFitosanitariosDAO {
-    
+
     EntityManagerFactory emf = EntityManagerFactorySingleton.getEntityManagerFactory();
-    
-    public void create(InventarioDeProductosFitosanitarios a) {
+
+    public boolean create(InventarioDeProductosFitosanitarios a) {
 
         if (read(a.getId()) == null) {
             EntityManager em = emf.createEntityManager();
             em.getTransaction().begin();
+            boolean ok = false;
             try {
                 em.persist(a);
                 em.getTransaction().commit();
+                ok = true;
             } catch (Exception e) {
                 em.getTransaction().rollback();
+                ok = false;
             } finally {
                 em.close();
             }
+            return ok;
         }
+        return false;
     }
 
     public InventarioDeProductosFitosanitarios read(long id) {
@@ -63,7 +67,6 @@ public class InventarioDeProductosFitosanitariosDAO {
         return r;
     }
 
-
     public void update(InventarioDeProductosFitosanitarios i) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -88,7 +91,7 @@ public class InventarioDeProductosFitosanitariosDAO {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         InventarioDeProductosFitosanitarios r = read(id);
-        boolean ok = false; 
+        boolean ok = false;
         if (r != null) {
             try {
                 r = em.merge(r);

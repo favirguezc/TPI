@@ -6,41 +6,41 @@
 
 package control;
 
-import dao.AplicacionFitosanitariaDAO;
+import dao.CosechaDAO;
 import java.util.List;
-import modelo.AplicacionFitosanitaria;
+import modelo.Cosecha;
 
 /**
  *
  * @author fredy
  */
-public class AplicacionFitosanitariaControl {
- 
-    AplicacionFitosanitariaDAO dao = new AplicacionFitosanitariaDAO();
+public class CosechaControl {
     
-    public boolean crear(AplicacionFitosanitaria f) {
+    CosechaDAO dao = new CosechaDAO();
+    
+    public boolean crear(Cosecha f) {
         return validar(f) && dao.create(f);
     }
 
-    public boolean eliminar(AplicacionFitosanitaria f) {
+    public boolean eliminar(Cosecha f) {
         return dao.delete(f.getId());
     }
 
-    public void actualizar(AplicacionFitosanitaria f) {
+    public void actualizar(Cosecha f) {
         if (validar(f)) {
             dao.update(f);
         }
     }
     
-    public AplicacionFitosanitaria leer(long id){
+    public Cosecha leer(long id){
         return dao.read(id);
     }
 
-    public List<AplicacionFitosanitaria> leerTodos() {
+    public List<Cosecha> leerTodos() {
         return dao.readAll();
     }
 
-    private boolean validar(AplicacionFitosanitaria f) {
+    private boolean validar(Cosecha f) {
         return true;
     }
 }

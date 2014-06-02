@@ -89,7 +89,7 @@ public class AdministradorDAO {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         Administrador r = read(id);
-        boolean ok = false; 
+        boolean ok = false;
         if (r != null) {
             try {
                 r = em.merge(r);

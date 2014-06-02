@@ -20,20 +20,25 @@ public class CosechaDAO {
     
     EntityManagerFactory emf = EntityManagerFactorySingleton.getEntityManagerFactory();
     
-    public void create(Cosecha a) {
+    public boolean create(Cosecha a) {
 
         if (read(a.getId()) == null) {
             EntityManager em = emf.createEntityManager();
             em.getTransaction().begin();
+            boolean ok = false;
             try {
                 em.persist(a);
                 em.getTransaction().commit();
+                ok = true;
             } catch (Exception e) {
                 em.getTransaction().rollback();
+                ok = false;
             } finally {
                 em.close();
             }
+            return ok;
         }
+        return false;
     }
 
     public Cosecha read(long id) {

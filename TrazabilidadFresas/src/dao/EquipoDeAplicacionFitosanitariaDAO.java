@@ -19,19 +19,24 @@ import modelo.EquipoDeAplicacionFitosanitaria;
 public class EquipoDeAplicacionFitosanitariaDAO {
     EntityManagerFactory emf = EntityManagerFactorySingleton.getEntityManagerFactory();
     
-    public void create(EquipoDeAplicacionFitosanitaria a) {
+    public boolean create(EquipoDeAplicacionFitosanitaria a) {
         if (read(a.getId()) == null) {
             EntityManager em = emf.createEntityManager();
             em.getTransaction().begin();
+            boolean ok = false;
             try {
                 em.persist(a);
                 em.getTransaction().commit();
+                ok = true;
             } catch (Exception e) {
                 em.getTransaction().rollback();
+                ok = false;
             } finally {
                 em.close();
             }
+            return ok;
         }
+        return false;
     }
 
     public EquipoDeAplicacionFitosanitaria read(long id) {
