@@ -21,8 +21,7 @@ public class AdministradorDAO {
     EntityManagerFactory emf = EntityManagerFactorySingleton.getEntityManagerFactory();
 
     public void create(Administrador f) {
-
-        if (read(f.getCedula()) == null) {
+        if (read(f.getId()) == null) {
             EntityManager em = emf.createEntityManager();
             em.getTransaction().begin();
             try {
@@ -36,22 +35,7 @@ public class AdministradorDAO {
         }
     }
 
-    public Administrador read(long cedula) {
-
-        EntityManager em = emf.createEntityManager();
-        Administrador r = null;
-        try {
-            r = (Administrador) em.createQuery("SELECT f FROM Administrador f WHERE f.cedula = :cedula").setParameter("cedula", cedula).getSingleResult();
-        } catch (NonUniqueResultException n) {
-            r = (Administrador) em.createQuery("SELECT f FROM Administrador f WHERE f.cedula = :cedula").setParameter("cedula", cedula).getResultList().get(0);
-        } catch (Exception e) {
-        } finally {
-            em.close();
-        }
-        return r;
-    }
-
-    private Administrador readById(long id) {
+    public Administrador read(long id) {
 
         EntityManager em = emf.createEntityManager();
         Administrador r = null;
@@ -65,7 +49,6 @@ public class AdministradorDAO {
     }
 
     public List readAll() {
-
         EntityManager em = emf.createEntityManager();
         ArrayList r = new ArrayList();
         try {
@@ -81,11 +64,8 @@ public class AdministradorDAO {
     public void update(Administrador i) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        Administrador f = read(i.getCedula());
+        Administrador f = read(i.getId());
         try {
-            if (f == null) {
-                f = readById(i.getId());
-            }
             if (f != null) {
                 f.setNombres(i.getNombres());
                 f.setApellidos(i.getApellidos());
@@ -100,19 +80,23 @@ public class AdministradorDAO {
         }
     }
 
-    public void delete(long cedula) {
+    public boolean delete(long id) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        Administrador r = read(cedula);
+        Administrador r = read(id);
+        boolean ok = false; 
         if (r != null) {
             try {
                 r = em.merge(r);
                 em.remove(r);
                 em.getTransaction().commit();
+                ok = true;
             } catch (Exception e) {
+                ok = false;
             } finally {
                 em.close();
             }
         }
+        return ok;
     }
 }

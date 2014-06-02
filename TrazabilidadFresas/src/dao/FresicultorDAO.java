@@ -21,39 +21,27 @@ public class FresicultorDAO {
 
     EntityManagerFactory emf = EntityManagerFactorySingleton.getEntityManagerFactory();
 
-    public void create(Fresicultor f) {
-
-        if (read(f.getCedula()) == null) {
+    public boolean create(Fresicultor f) {
+        if (read(f.getId()) == null) {
             EntityManager em = emf.createEntityManager();
             em.getTransaction().begin();
+            boolean ok = false;
             try {
                 em.persist(f);
                 em.getTransaction().commit();
+                ok = true;
             } catch (Exception e) {
                 em.getTransaction().rollback();
+                ok = false;
             } finally {
                 em.close();
             }
+            return ok;
         }
+        return false;
     }
 
-    public Fresicultor read(long cedula) {
-
-        EntityManager em = emf.createEntityManager();
-        Fresicultor r = null;
-        try {
-            r = (Fresicultor) em.createQuery("SELECT f FROM Fresicultor f WHERE f.cedula = :cedula").setParameter("cedula", cedula).getSingleResult();
-        } catch (NonUniqueResultException n) {
-            r = (Fresicultor) em.createQuery("SELECT f FROM Fresicultor f WHERE f.cedula = :cedula").setParameter("cedula", cedula).getResultList().get(0);
-        } catch (Exception e) {
-        } finally {
-            em.close();
-        }
-        return r;
-    }
-
-    private Fresicultor readById(long id) {
-
+    public Fresicultor read(long id) {
         EntityManager em = emf.createEntityManager();
         Fresicultor r = null;
         try {
@@ -66,7 +54,6 @@ public class FresicultorDAO {
     }
 
     public List readAll() {
-
         EntityManager em = emf.createEntityManager();
         ArrayList r = new ArrayList();
         try {
@@ -83,11 +70,8 @@ public class FresicultorDAO {
     public void update(Fresicultor i) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        Fresicultor f = read(i.getCedula());
+        Fresicultor f = read(i.getId());
         try {
-            if (f == null) {
-                f = readById(i.getId());
-            }
             if (f != null) {
                 f.setNombres(i.getNombres());
                 f.setApellidos(i.getApellidos());
@@ -102,19 +86,23 @@ public class FresicultorDAO {
         }
     }
 
-    public void delete(long cedula) {
+    public boolean delete(long id) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        Fresicultor r = read(cedula);
+        Fresicultor r = read(id);
+        boolean ok = false; 
         if (r != null) {
             try {
                 r = em.merge(r);
                 em.remove(r);
                 em.getTransaction().commit();
+                ok = true;
             } catch (Exception e) {
+                ok = false;
             } finally {
                 em.close();
             }
         }
+        return ok;
     }
 }

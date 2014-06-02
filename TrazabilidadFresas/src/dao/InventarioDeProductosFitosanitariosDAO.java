@@ -84,19 +84,23 @@ public class InventarioDeProductosFitosanitariosDAO {
         }
     }
 
-    public void delete(long id) {
+    public boolean delete(long id) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         InventarioDeProductosFitosanitarios r = read(id);
+        boolean ok = false; 
         if (r != null) {
             try {
                 r = em.merge(r);
                 em.remove(r);
                 em.getTransaction().commit();
+                ok = true;
             } catch (Exception e) {
+                ok = false;
             } finally {
                 em.close();
             }
         }
+        return ok;
     }
 }
