@@ -20,6 +20,11 @@ public class PlagaControl {
     PlagaDAO dao = new PlagaDAO();
     
     public boolean crear(Plaga p) {
+        for(Plaga i:leerTodos()){
+            if(i.getNombre().equals(p.getNombre())){
+                return false;
+            }
+        }
         return validar(p) && dao.create(p);
     }
     

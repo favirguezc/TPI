@@ -17,6 +17,7 @@ public class Plaga implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
+    private String nombre;
     private int maxima_valoracion;
     @OneToMany(mappedBy = "plaga",fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
@@ -44,6 +45,14 @@ public class Plaga implements Serializable {
 
     public void setRegistros(List<RegistroDeMonitoreoDePlagas> registros) {
         this.registros = registros;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
 }
