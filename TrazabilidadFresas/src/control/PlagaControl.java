@@ -48,7 +48,9 @@ public class PlagaControl {
     }
     
     private boolean validar(Plaga p) {        
-        if (p.getId() < 0
+        if (p.getNombre() == null
+                || p.getNombre().length() < 3
+                || p.getId() < 0
                 || p.getMaxima_valoracion() < 0) {
             return false;
         }

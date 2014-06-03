@@ -93,6 +93,7 @@ public class PlagaDAO {
                 p = readById(i.getId());
             }
             if (p != null) {
+                p.setNombre(i.getNombre());
                 p.setMaxima_valoracion(i.getMaxima_valoracion());
                 p.setRegistros(i.getRegistros());               
                 em.merge(p);
