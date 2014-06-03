@@ -16,9 +16,6 @@ import modelo.*;
 public class Main {
     public static void main(String[] args){
         
-        Plaga p = new Plaga();
-        p.setMaxima_valoracion(1);
-        p.setNombre("Mildeo polvoso");
-        new PlagaControl().crear(p);
+        
     }
 }

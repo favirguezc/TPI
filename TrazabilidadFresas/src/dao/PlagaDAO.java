@@ -102,7 +102,6 @@ public class PlagaDAO {
             } catch (Exception e) {
             } finally {
                 em.close();
-                return ret;
             }
         }
         return ret;
