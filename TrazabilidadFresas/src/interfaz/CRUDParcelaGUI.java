@@ -5,51 +5,70 @@
  */
 package interfaz;
 
-import control.ProductoFitosanitarioControl;
+import control.ParcelaControl;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modelo.ProductoFitosanitario;
+import modelo.Parcela;
 
 /**
  *
  * @author fredy
  */
-public class CRUDProductoFitosanitarioGUI extends javax.swing.JFrame {
+public class CRUDParcelaGUI extends javax.swing.JFrame {
 
     /**
-     * Creates new form CRUDLaboresCulturalesGUI
+     * Creates new form CRUDParcelaGUI
      */
     private boolean editing = false;
     private int filaEditable = -1;
-    private ArrayList productosFitosanitarios = new ArrayList();
+    private ArrayList parcelas = new ArrayList();
 
-    public CRUDProductoFitosanitarioGUI() {
+    public CRUDParcelaGUI() {
         initComponents();
         cargarTabla();
-        productosFitosanitariosTable.addMouseListener(new MouseAdapter() {
+        parcelasTable.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                int fila = productosFitosanitariosTable.rowAtPoint(e.getPoint());
-                int columna = productosFitosanitariosTable.columnAtPoint(e.getPoint());
+                int fila = parcelasTable.rowAtPoint(e.getPoint());
+                int columna = parcelasTable.columnAtPoint(e.getPoint());
                 if (editing && fila > -1 && columna > -1) {
                     if (filaEditable != -1 && fila == filaEditable) {
-                        String mensaje = "";
-                        switch (columna) {
-                            case 0:
-                                mensaje = "Ingrese el nombre";
-                                break;
-                            case 1:
-                                mensaje = "Ingrese el ingrediente activo";
-                                break;
+                        if (columna < 3) {
+                            String mensaje = "";
+                            switch (columna) {
+                                case 0:
+                                    mensaje = "Ingrese la ubicación en la finca";
+                                    break;
+                                case 1:
+                                    mensaje = "Ingrese el área";
+                                    break;
+                                case 2:
+                                    mensaje = "Ingrese el tipo de suelo";
+                                    break;
+                            }
+                            String m = JOptionPane.showInputDialog(mensaje);
+                            if (columna == 1) {
+                                m = m.replace(',', '.').replaceAll(" ", "");
+                                parcelasTable.setValueAt(Double.parseDouble(m), fila, columna);
+                            } else {
+                                parcelasTable.setValueAt(m, fila, columna);
+                            }
+                        } else {
+                            int b = JOptionPane.showConfirmDialog(null, "¿La parcela está activa?", "", JOptionPane.YES_NO_OPTION);
+                            if (b == JOptionPane.YES_OPTION) {
+                                parcelasTable.setValueAt("Si", fila, columna);
+                            } else {
+                                parcelasTable.setValueAt("No", fila, columna);
+                            }
                         }
-                        String m = JOptionPane.showInputDialog(mensaje);
-                        productosFitosanitariosTable.setValueAt(m, fila, columna);
+
                     }
                 }
             }
-        });
+        }
+        );
     }
 
     /**
@@ -67,12 +86,12 @@ public class CRUDProductoFitosanitarioGUI extends javax.swing.JFrame {
         borrarButton = new javax.swing.JButton();
         guardarButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        productosFitosanitariosTable = new javax.swing.JTable();
+        parcelasTable = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Productos Fitosanitarios"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Labores Culturales"));
 
         agregarButton.setText("Agregar");
         agregarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -96,19 +115,19 @@ public class CRUDProductoFitosanitarioGUI extends javax.swing.JFrame {
             }
         });
 
-        productosFitosanitariosTable.setModel(new javax.swing.table.DefaultTableModel(
+        parcelasTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nombre", "Ingrediente Activo"
+                "Ubicación en la finca", "Área", "Tipo de suelo", "Activa"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -119,10 +138,12 @@ public class CRUDProductoFitosanitarioGUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(productosFitosanitariosTable);
-        if (productosFitosanitariosTable.getColumnModel().getColumnCount() > 0) {
-            productosFitosanitariosTable.getColumnModel().getColumn(0).setResizable(false);
-            productosFitosanitariosTable.getColumnModel().getColumn(1).setResizable(false);
+        jScrollPane1.setViewportView(parcelasTable);
+        if (parcelasTable.getColumnModel().getColumnCount() > 0) {
+            parcelasTable.getColumnModel().getColumn(0).setResizable(false);
+            parcelasTable.getColumnModel().getColumn(1).setResizable(false);
+            parcelasTable.getColumnModel().getColumn(2).setResizable(false);
+            parcelasTable.getColumnModel().getColumn(3).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -198,7 +219,7 @@ public class CRUDProductoFitosanitarioGUI extends javax.swing.JFrame {
     private void agregarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarButtonActionPerformed
         // TODO add your handling code here:
         if (!editing) {
-            DefaultTableModel modelo = (DefaultTableModel) productosFitosanitariosTable.getModel();
+            DefaultTableModel modelo = (DefaultTableModel) parcelasTable.getModel();
             modelo.addRow(new Object[5]);
             filaEditable = modelo.getRowCount() - 1;
             guardarButton.setEnabled(true);
@@ -208,9 +229,9 @@ public class CRUDProductoFitosanitarioGUI extends javax.swing.JFrame {
 
     private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
         // TODO add your handling code here:
-        if (productosFitosanitariosTable.getSelectedRow() > -1) {
-            ProductoFitosanitario a = (ProductoFitosanitario) productosFitosanitarios.get(productosFitosanitariosTable.getSelectedRow());
-            new ProductoFitosanitarioControl().eliminar(a);
+        if (parcelasTable.getSelectedRow() > -1) {
+            Parcela a = (Parcela) parcelas.get(parcelasTable.getSelectedRow());
+            new ParcelaControl().eliminar(a);
             borrarTabla();
             cargarTabla();
         }
@@ -220,11 +241,13 @@ public class CRUDProductoFitosanitarioGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         guardarButton.setEnabled(false);
         editing = false;
-        ProductoFitosanitario lc = new ProductoFitosanitario();
+        Parcela p = new Parcela();
         try {
-            lc.setNombre((String) productosFitosanitariosTable.getValueAt(filaEditable, 0));
-            lc.setIngrediente_activo((String) productosFitosanitariosTable.getValueAt(filaEditable, 1));
-            if (!new ProductoFitosanitarioControl().crear(lc)) {
+            p.setUbicacion_en_la_finca((String) parcelasTable.getValueAt(filaEditable, 0));
+            p.setArea((double) parcelasTable.getValueAt(filaEditable, 1));
+            p.setTipo_de_suelo((String) parcelasTable.getValueAt(filaEditable, 2));
+            p.setActiva(parcelasTable.getValueAt(filaEditable, 3).equals("Si"));
+            if (!new ParcelaControl().crear(p)) {
                 throw new Exception();
             }
         } catch (Exception e) {
@@ -248,23 +271,28 @@ public class CRUDProductoFitosanitarioGUI extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CRUDProductoFitosanitarioGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDParcelaGUI.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CRUDProductoFitosanitarioGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDParcelaGUI.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CRUDProductoFitosanitarioGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDParcelaGUI.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CRUDProductoFitosanitarioGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDParcelaGUI.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CRUDProductoFitosanitarioGUI().setVisible(true);
+                new CRUDParcelaGUI().setVisible(true);
             }
         });
     }
@@ -277,21 +305,27 @@ public class CRUDProductoFitosanitarioGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable productosFitosanitariosTable;
+    private javax.swing.JTable parcelasTable;
     // End of variables declaration//GEN-END:variables
 
     private void cargarTabla() {
-        DefaultTableModel modelo = (DefaultTableModel) productosFitosanitariosTable.getModel();
-        productosFitosanitarios = (ArrayList) new ProductoFitosanitarioControl().leerTodos();
-        for (int i = 0; i < productosFitosanitarios.size(); i++) {
-            ProductoFitosanitario a = (ProductoFitosanitario) productosFitosanitarios.get(i);
-            String[] datos = {a.getNombre(), a.getIngrediente_activo()};
+        DefaultTableModel modelo = (DefaultTableModel) parcelasTable.getModel();
+        parcelas = (ArrayList) new ParcelaControl().leerTodos();
+        for (int i = 0; i < parcelas.size(); i++) {
+            Parcela a = (Parcela) parcelas.get(i);
+            String m;
+            if (a.isActiva()) {
+                m = "Si";
+            } else {
+                m = "No";
+            }
+            Object[] datos = {a.getUbicacion_en_la_finca(), a.getArea(), a.getTipo_de_suelo(), m};
             modelo.addRow(datos);
         }
     }
 
     private void borrarTabla() {
-        DefaultTableModel modelo = (DefaultTableModel) productosFitosanitariosTable.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) parcelasTable.getModel();
         while (modelo.getRowCount() > 0) {
             modelo.removeRow(0);
         }
