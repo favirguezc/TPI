@@ -9,6 +9,7 @@ import control.AdministradorControl;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -25,6 +26,7 @@ public class AdministrarAdministradoresGUI extends javax.swing.JFrame {
      */
     private boolean editing = false;
     private int filaEditable = -1;
+    private ArrayList administradores = new ArrayList();
 
     public AdministrarAdministradoresGUI() {
         initComponents();
@@ -150,7 +152,6 @@ public class AdministrarAdministradoresGUI extends javax.swing.JFrame {
         });
 
         borrarButton.setText("Borrar");
-        borrarButton.setEnabled(false);
         borrarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 borrarButtonActionPerformed(evt);
@@ -246,13 +247,15 @@ public class AdministrarAdministradoresGUI extends javax.swing.JFrame {
             adm.setClave((String) administradoresTable.getValueAt(filaEditable, 4));
             SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
             String strFecha = (String) administradoresTable.getValueAt(filaEditable, 3);
+            strFecha = strFecha.replaceAll(" ", "");
             Date fecha = null;
             fecha = formatoDelTexto.parse(strFecha);
             adm.setFecha_de_nacimiento(fecha);
-            new AdministradorControl().crear(adm);
+            if (!new AdministradorControl().crear(adm)) {
+                throw new Exception();
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error en los datos", "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
         }
         borrarTabla();
         loadAdministradores();
@@ -262,8 +265,10 @@ public class AdministrarAdministradoresGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (administradoresTable.getSelectedRow() > -1) {
             DefaultTableModel modelo = (DefaultTableModel) administradoresTable.getModel();
-            modelo.removeRow(administradoresTable.getSelectedRow());
-            borrarButton.setEnabled(false);
+            Administrador a = (Administrador) administradores.get(administradoresTable.getSelectedRow());
+            new AdministradorControl().eliminar(a);
+            borrarTabla();
+            loadAdministradores();
         }
     }//GEN-LAST:event_borrarButtonActionPerformed
 
@@ -316,10 +321,12 @@ public class AdministrarAdministradoresGUI extends javax.swing.JFrame {
     private void loadAdministradores() {
         DefaultTableModel modelo = (DefaultTableModel) administradoresTable.getModel();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        for (Administrador a : new AdministradorControl().leerTodos()) {
+        administradores = (ArrayList) new AdministradorControl().leerTodos();
+        for (int i = 0; i < administradores.size(); i++) {
+            Administrador a = (Administrador) administradores.get(i);
             String fecha = sdf.format(a.getFecha_de_nacimiento());
             String clave = "";
-            for (int i = 0; i < a.getClave().length(); i++) {
+            for (int k = 0; k < a.getClave().length(); k++) {
                 clave += "*";
             }
             Object[] datos = {a.getCedula(), a.getNombres(), a.getApellidos(), fecha, clave};
