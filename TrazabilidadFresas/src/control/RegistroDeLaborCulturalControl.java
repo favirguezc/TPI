@@ -7,6 +7,7 @@
 package control;
 
 import dao.RegistroDeLaborCulturalDAO;
+import java.util.Date;
 import java.util.List;
 import modelo.RegistroDeLaborCultural;
 
@@ -43,6 +44,7 @@ public class RegistroDeLaborCulturalControl {
     
     private boolean validar(RegistroDeLaborCultural r) {        
         if (r.getFecha() == null
+                || r.getFecha().after(new Date())
                 || r.getId() < 0
                 || r.getFresicultor() == null
                 || r.getLaborCultural() == null

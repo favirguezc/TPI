@@ -34,24 +34,15 @@ public class RegistroDeMonitoreoDePlagasControl {
     
     public RegistroDeMonitoreoDePlagas leer(long id) {
         RegistroDeMonitoreoDePlagas r = dao.read(id);
-        if (r == null) {
-            for (RegistroDeMonitoreoDePlagas i : leerTodos()) {
-                if (i.getId() == id) {
-                    r = i;
-                    break;
-                }
-            }
-        }
         return r;
     }
-    
     public List<RegistroDeMonitoreoDePlagas> leerTodos() {
         return dao.readAll();
     }
     
     private boolean validar(RegistroDeMonitoreoDePlagas r) {        
         if (r.getMonitoreoDePlagas() == null
-                || r.getValoracion()< 0 //no se si valorizacion puede ser menor que cero
+                || r.getValoracion()< 0     //No se si valorizacion puede ser menor que cero
                 || r.getId() < 0
                 || r.getPlaga() == null) {
             return false;

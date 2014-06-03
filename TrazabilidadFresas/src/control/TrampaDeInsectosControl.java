@@ -34,16 +34,8 @@ public class TrampaDeInsectosControl {
     }
     
     public TrampaDeInsectos leer(long id) {
-        TrampaDeInsectos s = dao.read(id);
-        if (s == null) {
-            for (TrampaDeInsectos i : leerTodos()) {
-                if (i.getId() == id) {
-                    s = i;
-                    break;
-                }
-            }
-        }
-        return s;
+        TrampaDeInsectos t = dao.read(id);
+        return t;
     }
     
     public List<TrampaDeInsectos> leerTodos() {
@@ -52,8 +44,10 @@ public class TrampaDeInsectosControl {
     
     private boolean validar(TrampaDeInsectos t) {        
         if (t.getNombre() == null
+                || t.getNombre().length() < 3
                 || t.getId() < 0
-                || t.getDescripcion()== null) {
+                || t.getDescripcion()== null
+                || t.getDescripcion().length() < 3) {
             return false;
         }
         if (t.getRegistros()== null) {

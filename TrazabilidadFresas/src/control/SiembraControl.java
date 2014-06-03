@@ -35,14 +35,6 @@ public class SiembraControl {
     
     public Siembra leer(long id) {
         Siembra s = dao.read(id);
-        if (s == null) {
-            for (Siembra i : leerTodos()) {
-                if (i.getId() == id) {
-                    s = i;
-                    break;
-                }
-            }
-        }
         return s;
     }
     

@@ -40,14 +40,6 @@ public class PlagaControl {
     
     public Plaga leer(long id) {
         Plaga p = dao.read(id);
-        if (p == null) {
-            for (Plaga i : leerTodos()) {
-                if (i.getId() == id) {
-                    p = i;
-                    break;
-                }
-            }
-        }
         return p;
     }
     

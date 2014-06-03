@@ -35,14 +35,6 @@ public class ProductoFitosanitarioControl {
     
     public ProductoFitosanitario leer(long id) {
         ProductoFitosanitario p = dao.read(id);
-        if (p == null) {
-            for (ProductoFitosanitario i : leerTodos()) {
-                if (i.getId() == id) {
-                    p = i;
-                    break;
-                }
-            }
-        }
         return p;
     }
     
@@ -52,6 +44,7 @@ public class ProductoFitosanitarioControl {
     
     private boolean validar(ProductoFitosanitario p) {        
         if (p.getNombre()== null
+                || p.getNombre().length() < 3
                 || p.getId() < 0
                 || p.getIngrediente_activo()== null) {
             return false;

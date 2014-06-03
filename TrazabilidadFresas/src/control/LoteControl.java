@@ -35,14 +35,6 @@ public class LoteControl {
     
     public Lote leer(long id) {
         Lote l = dao.read(id);
-        if (l == null) {
-            for (Lote i : leerTodos()) {
-                if (i.getId() == id) {
-                    l = i;
-                    break;
-                }
-            }
-        }
         return l;
     }
     

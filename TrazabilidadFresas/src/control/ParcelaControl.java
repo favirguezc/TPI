@@ -35,14 +35,6 @@ public class ParcelaControl {
     
     public Parcela leer(long id) {
         Parcela p = dao.read(id);
-        if (p == null) {
-            for (Parcela i : leerTodos()) {
-                if (i.getId() == id) {
-                    p = i;
-                    break;
-                }
-            }
-        }
         return p;
     }
     
@@ -52,9 +44,11 @@ public class ParcelaControl {
     
     private boolean validar(Parcela p) {        
         if (p.getTipo_de_suelo() == null
+                || p.getTipo_de_suelo().length() < 2
                 || p.getArea()< 0.0
                 || p.getId() < 0
-                || p.getUbicacion_en_la_finca() == null) {
+                || p.getUbicacion_en_la_finca() == null
+                || p.getUbicacion_en_la_finca().length() < 2) {
             return false;
         }
         if (p.getSiembras() == null) {

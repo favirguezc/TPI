@@ -8,6 +8,7 @@ package control;
 
 import dao.MonitoreoDePlagasDAO;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import modelo.MonitoreoDePlagas;
 
@@ -35,14 +36,6 @@ public class MonitoreoDePlagasControl {
     
     public MonitoreoDePlagas leer(long id) {
         MonitoreoDePlagas m = dao.read(id);
-        if (m == null) {
-            for (MonitoreoDePlagas i : leerTodos()) {
-                if (i.getId() == id) {
-                    m = i;
-                    break;
-                }
-            }
-        }
         return m;
     }
     
@@ -52,6 +45,7 @@ public class MonitoreoDePlagasControl {
     
     private boolean validar(MonitoreoDePlagas m) {        
         if (m.getFecha() == null
+                || m.getFecha().after(new Date())
                 || m.getNumero_de_planta() < 0
                 || m.getId() < 0) {
             return false;

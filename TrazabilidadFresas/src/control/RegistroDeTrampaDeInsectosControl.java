@@ -34,14 +34,6 @@ public class RegistroDeTrampaDeInsectosControl {
     
     public RegistroDeTrampaDeInsectos leer(long id) {
         RegistroDeTrampaDeInsectos r = dao.read(id);
-        if (r == null) {
-            for (RegistroDeTrampaDeInsectos i : leerTodos()) {
-                if (i.getId() == id) {
-                    r = i;
-                    break;
-                }
-            }
-        }
         return r;
     }
     
