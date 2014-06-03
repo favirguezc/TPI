@@ -56,19 +56,7 @@ public class AdministrarAdministradoresGUI extends javax.swing.JFrame {
                                 break;
                         }
                         String m = JOptionPane.showInputDialog(mensaje);
-                        Object t = new Object();
-                        switch (columna) {
-                            case 4:
-                                t = "";
-                                for (int i = 0; i < m.length(); i++) {
-                                    t += "*";
-                                }
-                                break;
-                            default:
-                                t = m;
-                                break;
-                        }
-                        administradoresTable.setValueAt(t, fila, columna);
+                        administradoresTable.setValueAt(m, fila, columna);
                     }
                 }
             }
