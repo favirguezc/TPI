@@ -47,21 +47,6 @@ public class ParcelaDAO {
         Parcela r = null;
         try {
             r = (Parcela) em.createQuery("SELECT p FROM Parcela p WHERE p.id = :id").setParameter("id", id).getSingleResult();
-        } catch (NonUniqueResultException n) {
-            r = (Parcela) em.createQuery("SELECT p FROM Parcela p WHERE p.id = :id").setParameter("id", id).getResultList().get(0);
-        } catch (Exception e) {
-        } finally {
-            em.close();
-        }
-        return r;
-    }
-
-    private Parcela readById(long id) {
-
-        EntityManager em = emf.createEntityManager();
-        Parcela r = null;
-        try {
-            r = (Parcela) em.createQuery("SELECT p FROM Parcela p WHERE p.id = :id").setParameter("id", id).getSingleResult();
         } catch (Exception e) {
         } finally {
             em.close();
@@ -89,9 +74,6 @@ public class ParcelaDAO {
         em.getTransaction().begin();
         Parcela p = read(i.getId());
         try {
-            if (p == null) {
-                p = readById(i.getId());
-            }
             if (p != null) {
                 p.setActiva(i.isActiva());
                 p.setArea(i.getArea());

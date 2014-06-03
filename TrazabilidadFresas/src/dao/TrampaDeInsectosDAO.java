@@ -48,21 +48,6 @@ public class TrampaDeInsectosDAO {
         TrampaDeInsectos r = null;
         try {
             r = (TrampaDeInsectos) em.createQuery("SELECT t FROM TrampaDeInsectos t WHERE t.id = :id").setParameter("id", id).getSingleResult();
-        } catch (NonUniqueResultException n) {
-            r = (TrampaDeInsectos) em.createQuery("SELECT t FROM TrampaDeInsectos t WHERE t.id = :id").setParameter("id", id).getResultList().get(0);
-        } catch (Exception e) {
-        } finally {
-            em.close();
-        }
-        return r;
-    }
-
-    private TrampaDeInsectos readById(long id) {
-
-        EntityManager em = emf.createEntityManager();
-        TrampaDeInsectos r = null;
-        try {
-            r = (TrampaDeInsectos) em.createQuery("SELECT t FROM TrampaDeInsectos t WHERE t.id = :id").setParameter("id", id).getSingleResult();
         } catch (Exception e) {
         } finally {
             em.close();
@@ -90,9 +75,6 @@ public class TrampaDeInsectosDAO {
         em.getTransaction().begin();
         TrampaDeInsectos r = read(i.getId());
         try {
-            if (r == null) {
-                r = readById(i.getId());
-            }
             if (r != null) {
                 r.setNombre(i.getNombre());
                 r.setDescripcion(i.getDescripcion());

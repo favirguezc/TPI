@@ -47,21 +47,6 @@ public class LoteDAO {
         Lote r = null;
         try {
             r = (Lote) em.createQuery("SELECT l FROM Lote l WHERE l.id = :id").setParameter("id", id).getSingleResult();
-        } catch (NonUniqueResultException n) {
-            r = (Lote) em.createQuery("SELECT l FROM Lote l WHERE l.id = :id").setParameter("id", id).getResultList().get(0);
-        } catch (Exception e) {
-        } finally {
-            em.close();
-        }
-        return r;
-    }
-
-    private Lote readById(long id) {
-
-        EntityManager em = emf.createEntityManager();
-        Lote r = null;
-        try {
-            r = (Lote) em.createQuery("SELECT l FROM Lote l WHERE l.id = :id").setParameter("id", id).getSingleResult();
         } catch (Exception e) {
         } finally {
             em.close();
@@ -89,9 +74,6 @@ public class LoteDAO {
         em.getTransaction().begin();
         Lote l = read(i.getId());
         try {
-            if (l == null) {
-                l = readById(i.getId());
-            }
             if (l != null) {
                 l.setCosechas(i.getCosechas());
                 l.setEtiquetas(i.getEtiquetas());

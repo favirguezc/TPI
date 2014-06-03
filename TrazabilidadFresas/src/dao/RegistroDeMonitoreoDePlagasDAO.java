@@ -47,21 +47,6 @@ public class RegistroDeMonitoreoDePlagasDAO {
         RegistroDeMonitoreoDePlagas r = null;
         try {
             r = (RegistroDeMonitoreoDePlagas) em.createQuery("SELECT rp FROM RegistroDeMonitoreoDePlagas rp WHERE rp.id = :id").setParameter("id", id).getSingleResult();
-        } catch (NonUniqueResultException n) {
-            r = (RegistroDeMonitoreoDePlagas) em.createQuery("SELECT rp FROM RegistroDeMonitoreoDePlagas rp WHERE rp.id = :id").setParameter("id", id).getResultList().get(0);
-        } catch (Exception e) {
-        } finally {
-            em.close();
-        }
-        return r;
-    }
-
-    private RegistroDeMonitoreoDePlagas readById(long id) {
-
-        EntityManager em = emf.createEntityManager();
-        RegistroDeMonitoreoDePlagas r = null;
-        try {
-            r = (RegistroDeMonitoreoDePlagas) em.createQuery("SELECT rp FROM RegistroDeMonitoreoDePlagas rp WHERE rp.id = :id").setParameter("id", id).getSingleResult();
         } catch (Exception e) {
         } finally {
             em.close();
@@ -89,9 +74,6 @@ public class RegistroDeMonitoreoDePlagasDAO {
         em.getTransaction().begin();
         RegistroDeMonitoreoDePlagas rp = read(i.getId());
         try {
-            if (rp == null) {
-                rp = readById(i.getId());
-            }
             if (rp != null) {
                 rp.setMonitoreoDePlagas(i.getMonitoreoDePlagas());
                 rp.setPlaga(i.getPlaga());

@@ -48,21 +48,6 @@ public class RegistroDeTrampaDeInsectosDAO {
         RegistroDeTrampaDeInsectos r = null;
         try {
             r = (RegistroDeTrampaDeInsectos) em.createQuery("SELECT ri FROM RegistroDeTrampaDeInsectos ri WHERE ri.id = :id").setParameter("id", id).getSingleResult();
-        } catch (NonUniqueResultException n) {
-            r = (RegistroDeTrampaDeInsectos) em.createQuery("SELECT ri FROM RegistroDeTrampaDeInsectos ri WHERE ri.id = :id").setParameter("id", id).getResultList().get(0);
-        } catch (Exception e) {
-        } finally {
-            em.close();
-        }
-        return r;
-    }
-
-    private RegistroDeTrampaDeInsectos readById(long id) {
-
-        EntityManager em = emf.createEntityManager();
-        RegistroDeTrampaDeInsectos r = null;
-        try {
-            r = (RegistroDeTrampaDeInsectos) em.createQuery("SELECT ri FROM RegistroDeTrampaDeInsectos ri WHERE ri.id = :id").setParameter("id", id).getSingleResult();
         } catch (Exception e) {
         } finally {
             em.close();
@@ -90,9 +75,6 @@ public class RegistroDeTrampaDeInsectosDAO {
         em.getTransaction().begin();
         RegistroDeTrampaDeInsectos ri = read(i.getId());
         try {
-            if (ri == null) {
-                ri = readById(i.getId());
-            }
             if (ri != null) {
                 ri.setNumero_de_individuos(i.getNumero_de_individuos());
                 ri.setFecha(i.getFecha());

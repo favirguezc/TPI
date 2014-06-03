@@ -47,21 +47,6 @@ public class SiembraDAO {
         Siembra r = null;
         try {
             r = (Siembra) em.createQuery("SELECT s FROM Siembra s WHERE s.id = :id").setParameter("id", id).getSingleResult();
-        } catch (NonUniqueResultException n) {
-            r = (Siembra) em.createQuery("SELECT s FROM Siembra s WHERE s.id = :id").setParameter("id", id).getResultList().get(0);
-        } catch (Exception e) {
-        } finally {
-            em.close();
-        }
-        return r;
-    }
-
-    private Siembra readById(long id) {
-
-        EntityManager em = emf.createEntityManager();
-        Siembra r = null;
-        try {
-            r = (Siembra) em.createQuery("SELECT s FROM Siembra s WHERE s.id = :id").setParameter("id", id).getSingleResult();
         } catch (Exception e) {
         } finally {
             em.close();
@@ -89,9 +74,6 @@ public class SiembraDAO {
         em.getTransaction().begin();
         Siembra s = read(i.getId());
         try {
-            if (s == null) {
-                s = readById(i.getId());
-            }
             if (s != null) {
                 s.setCosechas(i.getCosechas());
                 s.setParcela(i.getParcela());

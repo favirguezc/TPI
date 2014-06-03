@@ -47,21 +47,6 @@ public class RegistroDeLaborCulturalDAO {
         RegistroDeLaborCultural r = null;
         try {
             r = (RegistroDeLaborCultural) em.createQuery("SELECT rc FROM RegistroDeLaborCultural rc WHERE rc.id = :id").setParameter("id", id).getSingleResult();
-        } catch (NonUniqueResultException n) {
-            r = (RegistroDeLaborCultural) em.createQuery("SELECT rc FROM RegistroDeLaborCultural rc WHERE rc.id = :id").setParameter("id", id).getResultList().get(0);
-        } catch (Exception e) {
-        } finally {
-            em.close();
-        }
-        return r;
-    }
-
-    private RegistroDeLaborCultural readById(long id) {
-
-        EntityManager em = emf.createEntityManager();
-        RegistroDeLaborCultural r = null;
-        try {
-            r = (RegistroDeLaborCultural) em.createQuery("SELECT rc FROM RegistroDeLaborCultural rc WHERE rc.id = :id").setParameter("id", id).getSingleResult();
         } catch (Exception e) {
         } finally {
             em.close();
@@ -89,9 +74,6 @@ public class RegistroDeLaborCulturalDAO {
         em.getTransaction().begin();
         RegistroDeLaborCultural rc = read(i.getId());
         try {
-            if (rc == null) {
-                rc = readById(i.getId());
-            }
             if (rc != null) {
                 rc.setFecha(i.getFecha());
                 rc.setFresicultor(i.getFresicultor());

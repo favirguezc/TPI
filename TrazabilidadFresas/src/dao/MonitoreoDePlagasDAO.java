@@ -47,21 +47,6 @@ public class MonitoreoDePlagasDAO {
         MonitoreoDePlagas r = null;
         try {
             r = (MonitoreoDePlagas) em.createQuery("SELECT m FROM MonitoreoDePlagas m WHERE m.id = :id").setParameter("id", id).getSingleResult();
-        } catch (NonUniqueResultException n) {
-            r = (MonitoreoDePlagas) em.createQuery("SELECT m FROM MonitoreoDePlagas m WHERE m.id = :id").setParameter("id", id).getResultList().get(0);
-        } catch (Exception e) {
-        } finally {
-            em.close();
-        }
-        return r;
-    }
-
-    private MonitoreoDePlagas readById(long id) {
-
-        EntityManager em = emf.createEntityManager();
-        MonitoreoDePlagas r = null;
-        try {
-            r = (MonitoreoDePlagas) em.createQuery("SELECT m FROM MonitoreoDePlagas m WHERE m.id = :id").setParameter("id", id).getSingleResult();
         } catch (Exception e) {
         } finally {
             em.close();
@@ -89,9 +74,6 @@ public class MonitoreoDePlagasDAO {
         em.getTransaction().begin();
         MonitoreoDePlagas m = read(i.getId());
         try {
-            if (m == null) {
-                m = readById(i.getId());
-            }
             if (m != null) {
                 m.setFecha(i.getFecha());
                 m.setNumero_de_planta(i.getNumero_de_planta());

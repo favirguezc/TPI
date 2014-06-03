@@ -47,21 +47,6 @@ public class ProductoFitosanitarioDAO {
         ProductoFitosanitario r = null;
         try {
             r = (ProductoFitosanitario) em.createQuery("SELECT pf FROM ProductoFitosanitario pf WHERE pf.id = :id").setParameter("id", id).getSingleResult();
-        } catch (NonUniqueResultException n) {
-            r = (ProductoFitosanitario) em.createQuery("SELECT pf FROM ProductoFitosanitario pf WHERE pf.id = :id").setParameter("id", id).getResultList().get(0);
-        } catch (Exception e) {
-        } finally {
-            em.close();
-        }
-        return r;
-    }
-
-    private ProductoFitosanitario readById(long id) {
-
-        EntityManager em = emf.createEntityManager();
-        ProductoFitosanitario r = null;
-        try {
-            r = (ProductoFitosanitario) em.createQuery("SELECT pf FROM ProductoFitosanitario pf WHERE pf.id = :id").setParameter("id", id).getSingleResult();
         } catch (Exception e) {
         } finally {
             em.close();
@@ -89,9 +74,6 @@ public class ProductoFitosanitarioDAO {
         em.getTransaction().begin();
         ProductoFitosanitario pf = read(i.getId());
         try {
-            if (pf == null) {
-                pf = readById(i.getId());
-            }
             if (pf != null) {
                 pf.setAplicaciones(i.getAplicaciones());
                 pf.setIngrediente_activo(i.getIngrediente_activo());

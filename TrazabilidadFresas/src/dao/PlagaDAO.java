@@ -47,21 +47,6 @@ public class PlagaDAO {
         Plaga r = null;
         try {
             r = (Plaga) em.createQuery("SELECT p FROM Plaga p WHERE p.id = :id").setParameter("id", id).getSingleResult();
-        } catch (NonUniqueResultException n) {
-            r = (Plaga) em.createQuery("SELECT p FROM Plaga p WHERE p.id = :id").setParameter("id", id).getResultList().get(0);
-        } catch (Exception e) {
-        } finally {
-            em.close();
-        }
-        return r;
-    }
-
-    private Plaga readById(long id) {
-
-        EntityManager em = emf.createEntityManager();
-        Plaga r = null;
-        try {
-            r = (Plaga) em.createQuery("SELECT p FROM Plaga p WHERE p.id = :id").setParameter("id", id).getSingleResult();
         } catch (Exception e) {
         } finally {
             em.close();
@@ -89,9 +74,6 @@ public class PlagaDAO {
         em.getTransaction().begin();
         Plaga p = read(i.getId());
         try {
-            if (p == null) {
-                p = readById(i.getId());
-            }
             if (p != null) {
                 p.setNombre(i.getNombre());
                 p.setMaxima_valoracion(i.getMaxima_valoracion());
