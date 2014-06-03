@@ -3,6 +3,7 @@ package modelo;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,7 +23,7 @@ public class MonitoreoDePlagas implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
     private int numero_de_planta;
-    @OneToMany(mappedBy = "monitoreoDePlagas",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "monitoreoDePlagas",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<RegistroDeMonitoreoDePlagas> registros;
 

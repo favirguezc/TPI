@@ -2,6 +2,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,10 +18,10 @@ public class Lote implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
-    @OneToMany(mappedBy = "lote",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "lote",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Cosecha> cosechas;
-    @OneToMany(mappedBy = "lote",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "lote",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Etiqueta> etiquetas;
 

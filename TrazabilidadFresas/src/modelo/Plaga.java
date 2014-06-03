@@ -2,6 +2,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,7 +20,7 @@ public class Plaga implements Serializable {
     private long id;
     private String nombre;
     private int maxima_valoracion;
-    @OneToMany(mappedBy = "plaga",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "plaga",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<RegistroDeMonitoreoDePlagas> registros;
 

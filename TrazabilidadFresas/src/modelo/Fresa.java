@@ -2,6 +2,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,7 +20,7 @@ public class Fresa implements Serializable {
     private long id;
     private String especie;
     private String proveedor;
-    @OneToMany(mappedBy = "fresa",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "fresa",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Cosecha> cosechas;
 

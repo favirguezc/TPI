@@ -46,9 +46,9 @@ public class LaborCulturalControlTest {
     @Test
     public void testCrear() {
         LaborCultural f = new LaborCultural();
-        f.setNombre("cre");
+        f.setNombre("Aplicacion de fungicida");
         LaborCulturalControl instance = new LaborCulturalControl();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.crear(f);
         assertEquals(expResult, result);
     }

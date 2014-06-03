@@ -2,6 +2,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -12,7 +13,7 @@ import org.hibernate.annotations.FetchMode;
 public class Administrador extends Persona implements Serializable {
 
     private String clave;
-    @OneToMany(mappedBy = "administrador", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "administrador", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<AplicacionFitosanitaria> aplicaciones;
 

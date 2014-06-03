@@ -2,6 +2,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,10 +20,10 @@ public class ProductoFitosanitario implements Serializable {
     private long id;
     private String nombre;
     private String ingrediente_activo;
-    @OneToMany(mappedBy = "productoFitosanitario",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "productoFitosanitario",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<InventarioDeProductosFitosanitarios> inventario;
-    @OneToMany(mappedBy = "productoFitosanitario",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "productoFitosanitario",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<AplicacionFitosanitaria> aplicaciones;
 

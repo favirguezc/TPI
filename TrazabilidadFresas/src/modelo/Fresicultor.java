@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -9,13 +10,13 @@ import org.hibernate.annotations.FetchMode;
 
 @Entity
 public class Fresicultor extends Persona {
-    @OneToMany(mappedBy = "fresicultor",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "fresicultor",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<AplicacionFitosanitaria> aplicaciones;
-    @OneToMany(mappedBy = "fresicultor",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "fresicultor",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Cosecha> cosechas;
-    @OneToMany(mappedBy = "fresicultor",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "fresicultor",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<RegistroDeLaborCultural> laboresCulturales;
 
