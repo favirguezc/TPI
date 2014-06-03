@@ -3,17 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/JohnFredy/Documents/NetBeansProjects/TPI/TrazabilidadFresas/src/dao/RegistroDeTrampaDeInsectosDAO.java</file>
-            <file>file:/C:/Users/JohnFredy/Documents/NetBeansProjects/TPI/TrazabilidadFresas/src/dao/RegistroDeLaborCulturalDAO.java</file>
-            <file>file:/C:/Users/JohnFredy/Documents/NetBeansProjects/TPI/TrazabilidadFresas/src/dao/RegistroDeMonitoreoDePlagasDAO.java</file>
-            <file>file:/C:/Users/JohnFredy/Documents/NetBeansProjects/TPI/TrazabilidadFresas/src/dao/PlagaDAO.java</file>
-            <file>file:/C:/Users/JohnFredy/Documents/NetBeansProjects/TPI/TrazabilidadFresas/src/dao/TrampaDeInsectosDAO.java</file>
-            <file>file:/C:/Users/JohnFredy/Documents/NetBeansProjects/TPI/TrazabilidadFresas/src/dao/SiembraDAO.java</file>
-            <file>file:/C:/Users/JohnFredy/Documents/NetBeansProjects/TPI/TrazabilidadFresas/src/dao/ParcelaDAO.java</file>
-            <file>file:/C:/Users/JohnFredy/Documents/NetBeansProjects/TPI/TrazabilidadFresas/src/dao/LoteDAO.java</file>
-            <file>file:/C:/Users/JohnFredy/Documents/NetBeansProjects/TPI/TrazabilidadFresas/src/dao/FresicultorDAO.java</file>
-            <file>file:/C:/Users/JohnFredy/Documents/NetBeansProjects/TPI/TrazabilidadFresas/src/dao/MonitoreoDePlagasDAO.java</file>
-            <file>file:/C:/Users/JohnFredy/Documents/NetBeansProjects/TPI/TrazabilidadFresas/src/dao/ProductoFitosanitarioDAO.java</file>
+            <file>file:/C:/Users/JohnFredy/Documents/NetBeansProjects/TPI/TrazabilidadFresas/src/modelo/TrampaDeInsectos.java</file>
+            <file>file:/C:/Users/JohnFredy/Documents/NetBeansProjects/TPI/TrazabilidadFresas/src/control/RegistroDeTrampaDeInsectosControl.java</file>
+            <file>file:/C:/Users/JohnFredy/Documents/NetBeansProjects/TPI/TrazabilidadFresas/src/META-INF/persistence.xml</file>
+            <file>file:/C:/Users/JohnFredy/Documents/NetBeansProjects/TPI/TrazabilidadFresas/src/Main.java</file>
+            <file>file:/C:/Users/JohnFredy/Documents/NetBeansProjects/TPI/TrazabilidadFresas/src/modelo/RegistroDeTrampaDeInsectos.java</file>
+            <file>file:/C:/Users/JohnFredy/Documents/NetBeansProjects/TPI/TrazabilidadFresas/src/dao/EntityManagerFactorySingleton.java</file>
+            <file>file:/C:/Users/JohnFredy/Documents/NetBeansProjects/TPI/TrazabilidadFresas/src/control/AdministradorControl.java</file>
         </group>
     </open-files>
 </project-private>
