@@ -5,7 +5,7 @@
  */
 package interfaz;
 
-import control.FresicultorControl;
+import control.AdministradorControl;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
@@ -13,22 +13,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import modelo.Fresicultor;
+import modelo.Administrador;
 
 /**
  *
  * @author fredy
  */
-public class CRUDFresicultoresGUI extends javax.swing.JFrame {
+public class CRUDAdministradorGUI extends javax.swing.JFrame {
 
     /**
-     * Creates new form CRUDFresicultoresGUI
+     * Creates new form CRUDAdministradorGUI
      */
     private boolean editing = false;
     private int filaEditable = -1;
     private ArrayList administradores = new ArrayList();
 
-    public CRUDFresicultoresGUI() {
+    public CRUDAdministradorGUI() {
         initComponents();
         cargarTabla();
         administradoresTable.addMouseListener(new MouseAdapter() {
@@ -50,6 +50,9 @@ public class CRUDFresicultoresGUI extends javax.swing.JFrame {
                                 break;
                             case 3:
                                 mensaje = "Ingrese la fecha de nacimiento así: dd/mm/aaaa";
+                                break;
+                            case 4:
+                                mensaje = "Ingrese la clave";
                                 break;
                         }
                         String m = JOptionPane.showInputDialog(mensaje);
@@ -80,21 +83,21 @@ public class CRUDFresicultoresGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Fresicultores"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Administradores"));
 
         administradoresTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Cedula", "Nombres", "Apellidos", "Fecha de nacimiento"
+                "Cedula", "Nombres", "Apellidos", "Fecha de nacimiento", "Clave"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -113,6 +116,7 @@ public class CRUDFresicultoresGUI extends javax.swing.JFrame {
             administradoresTable.getColumnModel().getColumn(1).setResizable(false);
             administradoresTable.getColumnModel().getColumn(2).setResizable(false);
             administradoresTable.getColumnModel().getColumn(3).setResizable(false);
+            administradoresTable.getColumnModel().getColumn(4).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -222,18 +226,19 @@ public class CRUDFresicultoresGUI extends javax.swing.JFrame {
     private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
         // TODO add your handling code here:
         editing = false;
-        Fresicultor adm = new Fresicultor();
+        Administrador adm = new Administrador();
         try {
             adm.setApellidos((String) administradoresTable.getValueAt(filaEditable, 2));
             adm.setCedula(Long.parseLong((String) administradoresTable.getValueAt(filaEditable, 0)));
             adm.setNombres((String) administradoresTable.getValueAt(filaEditable, 1));
+            adm.setClave((String) administradoresTable.getValueAt(filaEditable, 4));
             SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
             String strFecha = (String) administradoresTable.getValueAt(filaEditable, 3);
             strFecha = strFecha.replaceAll(" ", "");
             Date fecha = null;
             fecha = formatoDelTexto.parse(strFecha);
             adm.setFecha_de_nacimiento(fecha);
-            if (!new FresicultorControl().crear(adm)) {
+            if (!new AdministradorControl().crear(adm)) {
                 throw new Exception();
             }
         } catch (Exception e) {
@@ -246,8 +251,8 @@ public class CRUDFresicultoresGUI extends javax.swing.JFrame {
     private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
         // TODO add your handling code here:
         if (administradoresTable.getSelectedRow() > -1) {
-            Fresicultor a = (Fresicultor) administradores.get(administradoresTable.getSelectedRow());
-            new FresicultorControl().eliminar(a);
+            Administrador a = (Administrador) administradores.get(administradoresTable.getSelectedRow());
+            new AdministradorControl().eliminar(a);
             borrarTabla();
             cargarTabla();
         }
@@ -270,20 +275,20 @@ public class CRUDFresicultoresGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CRUDFresicultoresGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDAdministradorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CRUDFresicultoresGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDAdministradorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CRUDFresicultoresGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDAdministradorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CRUDFresicultoresGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDAdministradorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CRUDFresicultoresGUI().setVisible(true);
+                new CRUDAdministradorGUI().setVisible(true);
             }
         });
     }
@@ -302,11 +307,15 @@ public class CRUDFresicultoresGUI extends javax.swing.JFrame {
     private void cargarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) administradoresTable.getModel();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        administradores = (ArrayList) new FresicultorControl().leerTodos();
+        administradores = (ArrayList) new AdministradorControl().leerTodos();
         for (int i = 0; i < administradores.size(); i++) {
-            Fresicultor a = (Fresicultor) administradores.get(i);
+            Administrador a = (Administrador) administradores.get(i);
             String fecha = sdf.format(a.getFecha_de_nacimiento());
-            Object[] datos = {a.getCedula(), a.getNombres(), a.getApellidos(), fecha};
+            String clave = "";
+            for (int k = 0; k < a.getClave().length(); k++) {
+                clave += "*";
+            }
+            Object[] datos = {a.getCedula(), a.getNombres(), a.getApellidos(), fecha, clave};
             modelo.addRow(datos);
         }
     }

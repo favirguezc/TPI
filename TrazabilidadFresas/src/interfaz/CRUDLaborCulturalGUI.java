@@ -17,16 +17,16 @@ import modelo.LaborCultural;
  *
  * @author fredy
  */
-public class CRUDLaboresCulturalesGUI extends javax.swing.JFrame {
+public class CRUDLaborCulturalGUI extends javax.swing.JFrame {
 
     /**
-     * Creates new form CRUDLaboresCulturalesGUI
+     * Creates new form CRUDLaborCulturalGUI
      */
     private boolean editing = false;
     private int filaEditable = -1;
     private ArrayList laboresCulturales = new ArrayList();
 
-    public CRUDLaboresCulturalesGUI() {
+    public CRUDLaborCulturalGUI() {
         initComponents();
         cargarTabla();
         laboresCulturalesTable.addMouseListener(new MouseAdapter() {
@@ -263,20 +263,20 @@ public class CRUDLaboresCulturalesGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CRUDLaboresCulturalesGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDLaborCulturalGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CRUDLaboresCulturalesGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDLaborCulturalGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CRUDLaboresCulturalesGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDLaborCulturalGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CRUDLaboresCulturalesGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDLaborCulturalGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CRUDLaboresCulturalesGUI().setVisible(true);
+                new CRUDLaborCulturalGUI().setVisible(true);
             }
         });
     }
