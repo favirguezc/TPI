@@ -4,11 +4,14 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 public class MonitoreoDePlagas implements Serializable {
@@ -19,7 +22,8 @@ public class MonitoreoDePlagas implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
     private int numero_de_planta;
-    @OneToMany(mappedBy = "monitoreoDePlagas")
+    @OneToMany(mappedBy = "monitoreoDePlagas",fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<RegistroDeMonitoreoDePlagas> registros;
 
     public long getId() {

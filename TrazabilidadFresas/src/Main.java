@@ -1,5 +1,6 @@
 
 import control.*;
+import java.util.Date;
 import modelo.*;
 
 /*
@@ -33,6 +34,15 @@ public class Main {
 //        lc.setNombre("Colocar plastico");
 //        lcc.crear(lc);
 //        System.out.println(lcc.leerTodos().size());
-        
+        Fresicultor f = new FresicultorControl().leer(1020794235);
+//        LaborCultural lc = new LaborCulturalControl().leer(1);
+//        RegistroDeLaborCultural rlc = new RegistroDeLaborCultural();
+//        rlc.setFecha(new Date());
+//        rlc.setFresicultor(f);
+//        rlc.setLaborCultural(lc);
+//        rlc.setObservaciones("alguna cosa");
+//        RegistroDeLaborCulturalControl rlcc = new RegistroDeLaborCulturalControl();
+//        rlcc.crear(rlc);      
+        System.out.println(f.getLaboresCulturales().size());
     }
 }

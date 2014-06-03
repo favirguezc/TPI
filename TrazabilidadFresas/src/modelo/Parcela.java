@@ -3,10 +3,13 @@ package modelo;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 public class Parcela implements Serializable {
@@ -17,8 +20,9 @@ public class Parcela implements Serializable {
     private String ubicacion_en_la_finca;
     private double area;
     private String tipo_de_suelo;
-    private boolean activa;    
-    @OneToMany(mappedBy = "parcela")
+    private boolean activa;
+    @OneToMany(mappedBy = "parcela", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Siembra> siembras;
 
     public long getId() {

@@ -3,10 +3,13 @@ package modelo;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 public class LaborCultural implements Serializable {
@@ -16,7 +19,8 @@ public class LaborCultural implements Serializable {
     private long id;
     private String nombre;
     private String descripcion;
-    @OneToMany(mappedBy = "laborCultural")
+    @OneToMany(mappedBy = "laborCultural",fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<RegistroDeLaborCultural> registros;
 
     public long getId() {

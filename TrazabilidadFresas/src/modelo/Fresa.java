@@ -3,10 +3,13 @@ package modelo;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 public class Fresa implements Serializable {
@@ -16,7 +19,8 @@ public class Fresa implements Serializable {
     private long id;
     private String especie;
     private String proveedor;
-    @OneToMany(mappedBy = "fresa")
+    @OneToMany(mappedBy = "fresa",fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Cosecha> cosechas;
 
     public long getId() {

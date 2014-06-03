@@ -3,10 +3,13 @@ package modelo;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 public class Lote implements Serializable {
@@ -14,9 +17,11 @@ public class Lote implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
-    @OneToMany(mappedBy = "lote")
+    @OneToMany(mappedBy = "lote",fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Cosecha> cosechas;
-    @OneToMany(mappedBy = "lote")
+    @OneToMany(mappedBy = "lote",fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Etiqueta> etiquetas;
 
     public long getId() {

@@ -3,11 +3,14 @@ package modelo;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 public class Siembra implements Serializable {
@@ -17,9 +20,11 @@ public class Siembra implements Serializable {
     private long id;
     @ManyToOne
     private Parcela parcela;    
-    @OneToMany(mappedBy = "siembra")
+    @OneToMany(mappedBy = "siembra",fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<AplicacionFitosanitaria> aplicaciones;
-    @OneToMany(mappedBy = "siembra")
+    @OneToMany(mappedBy = "siembra",fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Cosecha> cosechas;
 
     public List<AplicacionFitosanitaria> getAplicaciones() {

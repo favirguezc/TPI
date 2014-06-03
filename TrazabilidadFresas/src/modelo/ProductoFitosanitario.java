@@ -3,10 +3,13 @@ package modelo;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 public class ProductoFitosanitario implements Serializable {
@@ -16,9 +19,11 @@ public class ProductoFitosanitario implements Serializable {
     private long id;
     private String nombre;
     private String ingrediente_activo;
-    @OneToMany(mappedBy = "productoFitosanitario")
+    @OneToMany(mappedBy = "productoFitosanitario",fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<InventarioDeProductosFitosanitarios> inventario;
-    @OneToMany(mappedBy = "productoFitosanitario")
+    @OneToMany(mappedBy = "productoFitosanitario",fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<AplicacionFitosanitaria> aplicaciones;
 
     public long getId() {

@@ -3,12 +3,17 @@ package modelo;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 public class Administrador extends Persona implements Serializable {
-   private String clave;
-   @OneToMany(mappedBy = "administrador")
+
+    private String clave;
+    @OneToMany(mappedBy = "administrador", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<AplicacionFitosanitaria> aplicaciones;
 
     public List<AplicacionFitosanitaria> getAplicaciones() {
@@ -26,5 +31,5 @@ public class Administrador extends Persona implements Serializable {
     public void setClave(String clave) {
         this.clave = clave;
     }
-   
+
 }
