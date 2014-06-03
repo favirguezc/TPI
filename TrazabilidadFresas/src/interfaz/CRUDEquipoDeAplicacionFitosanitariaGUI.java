@@ -5,13 +5,13 @@
  */
 package interfaz;
 
-import control.LaborCulturalControl;
+import control.EquipoDeAplicacionFitosanitariaControl;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modelo.LaborCultural;
+import modelo.EquipoDeAplicacionFitosanitaria;
 
 /**
  *
@@ -24,15 +24,15 @@ public class CRUDEquipoDeAplicacionFitosanitariaGUI extends javax.swing.JFrame {
      */
     private boolean editing = false;
     private int filaEditable = -1;
-    private ArrayList laboresCulturales = new ArrayList();
+    private ArrayList equipoDeAplicacionesFitosanitarias = new ArrayList();
 
     public CRUDEquipoDeAplicacionFitosanitariaGUI() {
         initComponents();
         cargarTabla();
-        laboresCulturalesTable.addMouseListener(new MouseAdapter() {
+        equipoDeAplicacionesFitosanitariasTable.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                int fila = laboresCulturalesTable.rowAtPoint(e.getPoint());
-                int columna = laboresCulturalesTable.columnAtPoint(e.getPoint());
+                int fila = equipoDeAplicacionesFitosanitariasTable.rowAtPoint(e.getPoint());
+                int columna = equipoDeAplicacionesFitosanitariasTable.columnAtPoint(e.getPoint());
                 if (editing && fila > -1 && columna > -1) {
                     if (filaEditable != -1 && fila == filaEditable) {
                         String mensaje = "";
@@ -41,23 +41,11 @@ public class CRUDEquipoDeAplicacionFitosanitariaGUI extends javax.swing.JFrame {
                                 mensaje = "Ingrese el nombre";
                                 break;
                             case 1:
-                                mensaje = "Ingrese la descripcion";
+                                mensaje = "Ingrese la descripción";
                                 break;
                         }
                         String m = JOptionPane.showInputDialog(mensaje);
-                        Object t = new Object();
-                        switch (columna) {
-                            case 4:
-                                t = "";
-                                for (int i = 0; i < m.length(); i++) {
-                                    t += "*";
-                                }
-                                break;
-                            default:
-                                t = m;
-                                break;
-                        }
-                        laboresCulturalesTable.setValueAt(t, fila, columna);
+                        equipoDeAplicacionesFitosanitariasTable.setValueAt(m, fila, columna);
                     }
                 }
             }
@@ -79,7 +67,7 @@ public class CRUDEquipoDeAplicacionFitosanitariaGUI extends javax.swing.JFrame {
         borrarButton = new javax.swing.JButton();
         guardarButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        laboresCulturalesTable = new javax.swing.JTable();
+        equipoDeAplicacionesFitosanitariasTable = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -108,7 +96,7 @@ public class CRUDEquipoDeAplicacionFitosanitariaGUI extends javax.swing.JFrame {
             }
         });
 
-        laboresCulturalesTable.setModel(new javax.swing.table.DefaultTableModel(
+        equipoDeAplicacionesFitosanitariasTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -131,10 +119,10 @@ public class CRUDEquipoDeAplicacionFitosanitariaGUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(laboresCulturalesTable);
-        if (laboresCulturalesTable.getColumnModel().getColumnCount() > 0) {
-            laboresCulturalesTable.getColumnModel().getColumn(0).setResizable(false);
-            laboresCulturalesTable.getColumnModel().getColumn(1).setResizable(false);
+        jScrollPane1.setViewportView(equipoDeAplicacionesFitosanitariasTable);
+        if (equipoDeAplicacionesFitosanitariasTable.getColumnModel().getColumnCount() > 0) {
+            equipoDeAplicacionesFitosanitariasTable.getColumnModel().getColumn(0).setResizable(false);
+            equipoDeAplicacionesFitosanitariasTable.getColumnModel().getColumn(1).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -210,7 +198,7 @@ public class CRUDEquipoDeAplicacionFitosanitariaGUI extends javax.swing.JFrame {
     private void agregarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarButtonActionPerformed
         // TODO add your handling code here:
         if (!editing) {
-            DefaultTableModel modelo = (DefaultTableModel) laboresCulturalesTable.getModel();
+            DefaultTableModel modelo = (DefaultTableModel) equipoDeAplicacionesFitosanitariasTable.getModel();
             modelo.addRow(new Object[5]);
             filaEditable = modelo.getRowCount() - 1;
             guardarButton.setEnabled(true);
@@ -220,9 +208,9 @@ public class CRUDEquipoDeAplicacionFitosanitariaGUI extends javax.swing.JFrame {
 
     private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
         // TODO add your handling code here:
-        if (laboresCulturalesTable.getSelectedRow() > -1) {
-            LaborCultural a = (LaborCultural) laboresCulturales.get(laboresCulturalesTable.getSelectedRow());
-            new LaborCulturalControl().eliminar(a);
+        if (equipoDeAplicacionesFitosanitariasTable.getSelectedRow() > -1) {
+            EquipoDeAplicacionFitosanitaria a = (EquipoDeAplicacionFitosanitaria) equipoDeAplicacionesFitosanitarias.get(equipoDeAplicacionesFitosanitariasTable.getSelectedRow());
+            new EquipoDeAplicacionFitosanitariaControl().eliminar(a);
             borrarTabla();
             cargarTabla();
         }
@@ -232,11 +220,11 @@ public class CRUDEquipoDeAplicacionFitosanitariaGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         guardarButton.setEnabled(false);
         editing = false;
-        LaborCultural lc = new LaborCultural();
+        EquipoDeAplicacionFitosanitaria lc = new EquipoDeAplicacionFitosanitaria();
         try {
-            lc.setNombre((String) laboresCulturalesTable.getValueAt(filaEditable, 0));
-            lc.setDescripcion((String) laboresCulturalesTable.getValueAt(filaEditable, 1));
-            if (!new LaborCulturalControl().crear(lc)) {
+            lc.setNombre((String) equipoDeAplicacionesFitosanitariasTable.getValueAt(filaEditable, 0));
+            lc.setDescripcion((String) equipoDeAplicacionesFitosanitariasTable.getValueAt(filaEditable, 1));
+            if (!new EquipoDeAplicacionFitosanitariaControl().crear(lc)) {
                 throw new Exception();
             }
         } catch (Exception e) {
@@ -284,26 +272,26 @@ public class CRUDEquipoDeAplicacionFitosanitariaGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarButton;
     private javax.swing.JButton borrarButton;
+    private javax.swing.JTable equipoDeAplicacionesFitosanitariasTable;
     private javax.swing.JButton guardarButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable laboresCulturalesTable;
     // End of variables declaration//GEN-END:variables
 
     private void cargarTabla() {
-        DefaultTableModel modelo = (DefaultTableModel) laboresCulturalesTable.getModel();
-        laboresCulturales = (ArrayList) new LaborCulturalControl().leerTodos();
-        for (int i = 0; i < laboresCulturales.size(); i++) {
-            LaborCultural a = (LaborCultural) laboresCulturales.get(i);
+        DefaultTableModel modelo = (DefaultTableModel) equipoDeAplicacionesFitosanitariasTable.getModel();
+        equipoDeAplicacionesFitosanitarias = (ArrayList) new EquipoDeAplicacionFitosanitariaControl().leerTodos();
+        for (int i = 0; i < equipoDeAplicacionesFitosanitarias.size(); i++) {
+            EquipoDeAplicacionFitosanitaria a = (EquipoDeAplicacionFitosanitaria) equipoDeAplicacionesFitosanitarias.get(i);
             String[] datos = {a.getNombre(), a.getDescripcion()};
             modelo.addRow(datos);
         }
     }
 
     private void borrarTabla() {
-        DefaultTableModel modelo = (DefaultTableModel) laboresCulturalesTable.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) equipoDeAplicacionesFitosanitariasTable.getModel();
         while (modelo.getRowCount() > 0) {
             modelo.removeRow(0);
         }

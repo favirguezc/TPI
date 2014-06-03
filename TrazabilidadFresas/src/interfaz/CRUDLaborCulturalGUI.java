@@ -45,19 +45,7 @@ public class CRUDLaborCulturalGUI extends javax.swing.JFrame {
                                 break;
                         }
                         String m = JOptionPane.showInputDialog(mensaje);
-                        Object t = new Object();
-                        switch (columna) {
-                            case 4:
-                                t = "";
-                                for (int i = 0; i < m.length(); i++) {
-                                    t += "*";
-                                }
-                                break;
-                            default:
-                                t = m;
-                                break;
-                        }
-                        laboresCulturalesTable.setValueAt(t, fila, columna);
+                        laboresCulturalesTable.setValueAt(m, fila, columna);
                     }
                 }
             }
