@@ -18,6 +18,7 @@ public class RegistroDeLaborCultural implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private java.util.Date fecha;
     private String observaciones;
+    private double jornales;
     @ManyToOne
     private Fresicultor fresicultor;
     @ManyToOne
@@ -47,6 +48,14 @@ public class RegistroDeLaborCultural implements Serializable {
         this.observaciones = observaciones;
     }
 
+    public double getJornales() {
+        return jornales;
+    }
+
+    public void setJornales(double jornales) {
+        this.jornales = jornales;
+    }
+    
     public Fresicultor getFresicultor() {
         return fresicultor;
     }

@@ -79,6 +79,7 @@ public class RegistroDeLaborCulturalDAO {
                 rc.setFresicultor(i.getFresicultor());
                 rc.setLaborCultural(i.getLaborCultural());
                 rc.setObservaciones(i.getObservaciones());
+                rc.setJornales(i.getJornales());
                 em.merge(rc);
                 em.getTransaction().commit();
             }

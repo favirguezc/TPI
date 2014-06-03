@@ -46,6 +46,7 @@ public class RegistroDeLaborCulturalControl {
         if (r.getFecha() == null
                 || r.getFecha().after(new Date())
                 || r.getId() < 0
+                || r.getJornales() < 0
                 || r.getFresicultor() == null
                 || r.getLaborCultural() == null
                 || r.getObservaciones() == null) {
