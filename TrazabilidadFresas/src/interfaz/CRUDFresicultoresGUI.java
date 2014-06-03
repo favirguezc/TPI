@@ -19,16 +19,16 @@ import modelo.Fresicultor;
  *
  * @author fredy
  */
-public class AdministrarFresicultoresGUI extends javax.swing.JFrame {
+public class CRUDFresicultoresGUI extends javax.swing.JFrame {
 
     /**
-     * Creates new form AdministrarFresicultoresGUI
+     * Creates new form CRUDFresicultoresGUI
      */
     private boolean editing = false;
     private int filaEditable = -1;
     private ArrayList administradores = new ArrayList();
 
-    public AdministrarFresicultoresGUI() {
+    public CRUDFresicultoresGUI() {
         initComponents();
         cargarTabla();
         administradoresTable.addMouseListener(new MouseAdapter() {
@@ -270,20 +270,20 @@ public class AdministrarFresicultoresGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdministrarFresicultoresGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDFresicultoresGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdministrarFresicultoresGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDFresicultoresGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdministrarFresicultoresGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDFresicultoresGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdministrarFresicultoresGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDFresicultoresGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdministrarFresicultoresGUI().setVisible(true);
+                new CRUDFresicultoresGUI().setVisible(true);
             }
         });
     }

@@ -5,59 +5,58 @@
  */
 package interfaz;
 
-import control.LaborCulturalControl;
+import control.AdministradorControl;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
+import java.util.Date;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import modelo.LaborCultural;
+import modelo.Administrador;
 
 /**
  *
  * @author fredy
  */
-public class AdministrarLaboresCulturalesGUI extends javax.swing.JFrame {
+public class CRUDAdministradoresGUI extends javax.swing.JFrame {
 
     /**
-     * Creates new form AdministrarLaboresCulturalesGUI
+     * Creates new form CRUDAdministradoresGUI
      */
     private boolean editing = false;
     private int filaEditable = -1;
-    private ArrayList laboresCulturales = new ArrayList();
+    private ArrayList administradores = new ArrayList();
 
-    public AdministrarLaboresCulturalesGUI() {
+    public CRUDAdministradoresGUI() {
         initComponents();
         cargarTabla();
-        laboresCulturalesTable.addMouseListener(new MouseAdapter() {
+        administradoresTable.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                int fila = laboresCulturalesTable.rowAtPoint(e.getPoint());
-                int columna = laboresCulturalesTable.columnAtPoint(e.getPoint());
+                int fila = administradoresTable.rowAtPoint(e.getPoint());
+                int columna = administradoresTable.columnAtPoint(e.getPoint());
                 if (editing && fila > -1 && columna > -1) {
                     if (filaEditable != -1 && fila == filaEditable) {
                         String mensaje = "";
                         switch (columna) {
                             case 0:
-                                mensaje = "Ingrese el nombre";
+                                mensaje = "Ingrese el numero de cédula";
                                 break;
                             case 1:
-                                mensaje = "Ingrese la descripcion";
+                                mensaje = "Ingrese los nombres";
+                                break;
+                            case 2:
+                                mensaje = "Ingrese los apellidos";
+                                break;
+                            case 3:
+                                mensaje = "Ingrese la fecha de nacimiento así: dd/mm/aaaa";
+                                break;
+                            case 4:
+                                mensaje = "Ingrese la clave";
                                 break;
                         }
                         String m = JOptionPane.showInputDialog(mensaje);
-                        Object t = new Object();
-                        switch (columna) {
-                            case 4:
-                                t = "";
-                                for (int i = 0; i < m.length(); i++) {
-                                    t += "*";
-                                }
-                                break;
-                            default:
-                                t = m;
-                                break;
-                        }
-                        laboresCulturalesTable.setValueAt(t, fila, columna);
+                        administradoresTable.setValueAt(m, fila, columna);
                     }
                 }
             }
@@ -74,17 +73,64 @@ public class AdministrarLaboresCulturalesGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        administradoresTable = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         agregarButton = new javax.swing.JButton();
         borrarButton = new javax.swing.JButton();
         guardarButton = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        laboresCulturalesTable = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Labores Culturales"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Administradores"));
+
+        administradoresTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Cedula", "Nombres", "Apellidos", "Fecha de nacimiento", "Clave"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        administradoresTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        administradoresTable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(administradoresTable);
+        if (administradoresTable.getColumnModel().getColumnCount() > 0) {
+            administradoresTable.getColumnModel().getColumn(0).setResizable(false);
+            administradoresTable.getColumnModel().getColumn(1).setResizable(false);
+            administradoresTable.getColumnModel().getColumn(2).setResizable(false);
+            administradoresTable.getColumnModel().getColumn(3).setResizable(false);
+            administradoresTable.getColumnModel().getColumn(4).setResizable(false);
+        }
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
         agregarButton.setText("Agregar");
         agregarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -108,43 +154,12 @@ public class AdministrarLaboresCulturalesGUI extends javax.swing.JFrame {
             }
         });
 
-        laboresCulturalesTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Nombre", "Descripción"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(laboresCulturalesTable);
-        if (laboresCulturalesTable.getColumnModel().getColumnCount() > 0) {
-            laboresCulturalesTable.getColumnModel().getColumn(0).setResizable(false);
-            laboresCulturalesTable.getColumnModel().getColumn(1).setResizable(false);
-        }
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(agregarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -156,41 +171,31 @@ public class AdministrarLaboresCulturalesGUI extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(agregarButton)
-                        .addGap(7, 7, 7)
-                        .addComponent(guardarButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(borrarButton))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(agregarButton)
+                .addGap(7, 7, 7)
+                .addComponent(guardarButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(borrarButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -210,7 +215,7 @@ public class AdministrarLaboresCulturalesGUI extends javax.swing.JFrame {
     private void agregarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarButtonActionPerformed
         // TODO add your handling code here:
         if (!editing) {
-            DefaultTableModel modelo = (DefaultTableModel) laboresCulturalesTable.getModel();
+            DefaultTableModel modelo = (DefaultTableModel) administradoresTable.getModel();
             modelo.addRow(new Object[5]);
             filaEditable = modelo.getRowCount() - 1;
             guardarButton.setEnabled(true);
@@ -218,25 +223,22 @@ public class AdministrarLaboresCulturalesGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_agregarButtonActionPerformed
 
-    private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
-        // TODO add your handling code here:
-        if (laboresCulturalesTable.getSelectedRow() > -1) {
-            LaborCultural a = (LaborCultural) laboresCulturales.get(laboresCulturalesTable.getSelectedRow());
-            new LaborCulturalControl().eliminar(a);
-            borrarTabla();
-            cargarTabla();
-        }
-    }//GEN-LAST:event_borrarButtonActionPerformed
-
     private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
         // TODO add your handling code here:
-        guardarButton.setEnabled(false);
         editing = false;
-        LaborCultural lc = new LaborCultural();
+        Administrador adm = new Administrador();
         try {
-            lc.setNombre((String) laboresCulturalesTable.getValueAt(filaEditable, 0));
-            lc.setDescripcion((String) laboresCulturalesTable.getValueAt(filaEditable, 1));
-            if (!new LaborCulturalControl().crear(lc)) {
+            adm.setApellidos((String) administradoresTable.getValueAt(filaEditable, 2));
+            adm.setCedula(Long.parseLong((String) administradoresTable.getValueAt(filaEditable, 0)));
+            adm.setNombres((String) administradoresTable.getValueAt(filaEditable, 1));
+            adm.setClave((String) administradoresTable.getValueAt(filaEditable, 4));
+            SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
+            String strFecha = (String) administradoresTable.getValueAt(filaEditable, 3);
+            strFecha = strFecha.replaceAll(" ", "");
+            Date fecha = null;
+            fecha = formatoDelTexto.parse(strFecha);
+            adm.setFecha_de_nacimiento(fecha);
+            if (!new AdministradorControl().crear(adm)) {
                 throw new Exception();
             }
         } catch (Exception e) {
@@ -245,6 +247,16 @@ public class AdministrarLaboresCulturalesGUI extends javax.swing.JFrame {
         borrarTabla();
         cargarTabla();
     }//GEN-LAST:event_guardarButtonActionPerformed
+
+    private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
+        // TODO add your handling code here:
+        if (administradoresTable.getSelectedRow() > -1) {
+            Administrador a = (Administrador) administradores.get(administradoresTable.getSelectedRow());
+            new AdministradorControl().eliminar(a);
+            borrarTabla();
+            cargarTabla();
+        }
+    }//GEN-LAST:event_borrarButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -263,25 +275,26 @@ public class AdministrarLaboresCulturalesGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdministrarLaboresCulturalesGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDAdministradoresGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdministrarLaboresCulturalesGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDAdministradoresGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdministrarLaboresCulturalesGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDAdministradoresGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdministrarLaboresCulturalesGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDAdministradoresGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdministrarLaboresCulturalesGUI().setVisible(true);
+                new CRUDAdministradoresGUI().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable administradoresTable;
     private javax.swing.JButton agregarButton;
     private javax.swing.JButton borrarButton;
     private javax.swing.JButton guardarButton;
@@ -289,21 +302,26 @@ public class AdministrarLaboresCulturalesGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable laboresCulturalesTable;
     // End of variables declaration//GEN-END:variables
 
     private void cargarTabla() {
-        DefaultTableModel modelo = (DefaultTableModel) laboresCulturalesTable.getModel();
-        laboresCulturales = (ArrayList) new LaborCulturalControl().leerTodos();
-        for (int i = 0; i < laboresCulturales.size(); i++) {
-            LaborCultural a = (LaborCultural) laboresCulturales.get(i);
-            String[] datos = {a.getNombre(), a.getDescripcion()};
+        DefaultTableModel modelo = (DefaultTableModel) administradoresTable.getModel();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        administradores = (ArrayList) new AdministradorControl().leerTodos();
+        for (int i = 0; i < administradores.size(); i++) {
+            Administrador a = (Administrador) administradores.get(i);
+            String fecha = sdf.format(a.getFecha_de_nacimiento());
+            String clave = "";
+            for (int k = 0; k < a.getClave().length(); k++) {
+                clave += "*";
+            }
+            Object[] datos = {a.getCedula(), a.getNombres(), a.getApellidos(), fecha, clave};
             modelo.addRow(datos);
         }
     }
 
     private void borrarTabla() {
-        DefaultTableModel modelo = (DefaultTableModel) laboresCulturalesTable.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) administradoresTable.getModel();
         while (modelo.getRowCount() > 0) {
             modelo.removeRow(0);
         }
