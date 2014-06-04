@@ -214,8 +214,8 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
             adm.setSiembra((Siembra) aplicacionesTable.getValueAt(filaEditable, 1));
             adm.setProductoFitosanitario((ProductoFitosanitario) aplicacionesTable.getValueAt(filaEditable, 2));
             adm.setMotivo((String) aplicacionesTable.getValueAt(filaEditable, 4));
-            adm.setPc((boolean) (aplicacionesTable.getValueAt(filaEditable, 5) != null && (boolean) aplicacionesTable.getValueAt(filaEditable, 4)));
-            adm.setTr((boolean) (aplicacionesTable.getValueAt(filaEditable, 6) != null && (boolean) aplicacionesTable.getValueAt(filaEditable, 5)));
+            adm.setPc(aplicacionesTable.getValueAt(filaEditable, 5) != null && Boolean.parseBoolean((String) aplicacionesTable.getValueAt(filaEditable, 4)));
+            adm.setTr(aplicacionesTable.getValueAt(filaEditable, 6) != null &&Boolean.parseBoolean((String) aplicacionesTable.getValueAt(filaEditable, 5)));
             adm.setCantidadAplicada((double) aplicacionesTable.getValueAt(filaEditable, 7));
             adm.setLitrosDeAguaUtilizada((double) aplicacionesTable.getValueAt(filaEditable, 8));
             adm.setEquipoDeAplicacionFitosanitaria((EquipoDeAplicacionFitosanitaria) aplicacionesTable.getValueAt(filaEditable, 9));
@@ -228,10 +228,8 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error en los datos", "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
         }
-        borrarTabla();
-        cargarTabla();
+        actualizarTabla();
     }//GEN-LAST:event_guardarButtonActionPerformed
 
     private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
@@ -239,20 +237,19 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
         if (aplicacionesTable.getSelectedRow() > -1) {
             AplicacionFitosanitaria a = (AplicacionFitosanitaria) aplicaciones.get(aplicacionesTable.getSelectedRow());
             new AplicacionFitosanitariaControl().eliminar(a);
-            borrarTabla();
-            cargarTabla();
+            actualizarTabla();
         }
     }//GEN-LAST:event_borrarButtonActionPerformed
 
     private void jXDatePicker1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDatePicker1ActionPerformed
         // TODO add your handling code here:
-        borrarTabla();
-        cargarTabla();
+        actualizarTabla();
     }//GEN-LAST:event_jXDatePicker1ActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         // TODO add your handling code here:
         jXDatePicker1.setEnabled(!jCheckBox1.isSelected());
+        actualizarTabla();
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     /**
@@ -393,5 +390,11 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
             comboBox.addItem(s);
         }
         productoColumn.setCellEditor(new DefaultCellEditor(comboBox));
+    }
+
+    private void actualizarTabla() {
+        borrarTabla();
+        setCellEditors();
+        cargarTabla();
     }
 }

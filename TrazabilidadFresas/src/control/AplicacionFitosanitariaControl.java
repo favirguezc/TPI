@@ -64,7 +64,6 @@ public class AplicacionFitosanitariaControl {
                 listaSemana.add(a);
             }
         }
-        System.out.println(d.getTime());
         return listaSemana;
     }
 

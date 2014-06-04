@@ -57,8 +57,7 @@ public class AdministradorDAO {
         EntityManager em = emf.createEntityManager();
         ArrayList r = new ArrayList();
         try {
-            r = (ArrayList) em.createQuery("SELECT f FROM Administrador f",
-                    Administrador.class).getResultList();
+            r = (ArrayList) em.createQuery("SELECT f FROM Administrador f").getResultList();
         } catch (Exception e) {
         } finally {
             em.close();
