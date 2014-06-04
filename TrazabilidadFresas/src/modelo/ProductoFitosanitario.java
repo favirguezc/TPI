@@ -20,10 +20,10 @@ public class ProductoFitosanitario implements Serializable {
     private long id;
     private String nombre;
     private String ingrediente_activo;
-    @OneToMany(mappedBy = "productoFitosanitario",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "productoFitosanitario", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<InventarioDeProductosFitosanitarios> inventario;
-    @OneToMany(mappedBy = "productoFitosanitario",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "productoFitosanitario", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<AplicacionFitosanitaria> aplicaciones;
 
@@ -67,4 +67,8 @@ public class ProductoFitosanitario implements Serializable {
         this.aplicaciones = aplicaciones;
     }
 
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }
