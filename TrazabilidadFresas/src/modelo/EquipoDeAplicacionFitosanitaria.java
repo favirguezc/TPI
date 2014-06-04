@@ -55,9 +55,9 @@ public class EquipoDeAplicacionFitosanitaria implements Serializable{
     public void setAplicaciones(List<AplicacionFitosanitaria> aplicaciones) {
         this.aplicaciones = aplicaciones;
     }
-
+    
     @Override
-    public String toString() {
-        return "EquipoDeAplicacionFitosanitaria{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", aplicaciones=" + aplicaciones + '}';
+    public String toString(){
+        return nombre;
     }
 }

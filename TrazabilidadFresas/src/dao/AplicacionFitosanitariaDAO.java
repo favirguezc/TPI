@@ -81,10 +81,10 @@ public class AplicacionFitosanitariaDAO {
                 f.setLitrosDeAguaUtilizada(i.getLitrosDeAguaUtilizada());
                 f.setMotivo(i.getMotivo());
                 f.setObservaciones(i.getObservaciones());
-                f.setPc(i.getPc());
+                f.setPc(i.isPc());
                 f.setProductoFitosanitario(i.getProductoFitosanitario());
                 f.setSiembra(i.getSiembra());
-                f.setTr(i.getTr());
+                f.setTr(i.isTr());
                 em.merge(f);
                 em.getTransaction().commit();
             }
