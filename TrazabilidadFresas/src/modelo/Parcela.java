@@ -74,4 +74,8 @@ public class Parcela implements Serializable {
         this.siembras = siembras;
     }
 
+    @Override
+    public String toString() {
+        return "Parcela{" + "id=" + id + ", ubicacion_en_la_finca=" + ubicacion_en_la_finca + ", area=" + area + ", tipo_de_suelo=" + tipo_de_suelo + ", activa=" + activa + ", siembras=" + siembras + '}';
+    }
 }

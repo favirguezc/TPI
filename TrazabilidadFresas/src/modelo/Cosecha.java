@@ -80,4 +80,8 @@ public class Cosecha implements Serializable {
         this.fresa = fresa;
     }
 
+    @Override
+    public String toString() {
+        return "Cosecha{" + "id=" + id + ", tipo=" + tipo + ", cantidad=" + cantidad + ", lote=" + lote + ", fresicultor=" + fresicultor + ", siembra=" + siembra + ", fresa=" + fresa + '}';
+    }
 }

@@ -59,6 +59,9 @@ public class Siembra implements Serializable {
     public void setCosechas(List<Cosecha> cosechas) {
         this.cosechas = cosechas;
     }
-    
 
+    @Override
+    public String toString() {
+        return "Siembra{" + "id=" + id + ", parcela=" + parcela + ", aplicaciones=" + aplicaciones + ", cosechas=" + cosechas + '}';
+    }
 }

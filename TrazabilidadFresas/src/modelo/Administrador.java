@@ -33,4 +33,8 @@ public class Administrador extends Persona implements Serializable {
         this.clave = clave;
     }
 
+    @Override
+    public String toString() {
+        return "Administrador{" + super.toString() + "clave=" + clave + ", aplicaciones=" + aplicaciones + '}';
+    }
 }

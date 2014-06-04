@@ -72,4 +72,8 @@ public class RegistroDeLaborCultural implements Serializable {
         this.laborCultural = laborCultural;
     }
 
+    @Override
+    public String toString() {
+        return "RegistroDeLaborCultural{" + "id=" + id + ", fecha=" + fecha + ", observaciones=" + observaciones + ", jornales=" + jornales + ", fresicultor=" + fresicultor + ", laborCultural=" + laborCultural + '}';
+    }
 }

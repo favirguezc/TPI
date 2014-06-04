@@ -32,4 +32,8 @@ public class Etiqueta implements Serializable {
         this.lote = lote;
     }
 
+    @Override
+    public String toString() {
+        return "Etiqueta{" + "id=" + id + ", lote=" + lote + '}';
+    }
 }

@@ -147,5 +147,8 @@ public class AplicacionFitosanitaria implements Serializable {
         this.siembra = siembra;
     }
 
-    
+    @Override
+    public String toString() {
+        return "AplicacionFitosanitaria{" + "id=" + id + ", fecha=" + fecha + ", motivo=" + motivo + ", pc=" + pc + ", tr=" + tr + ", cantidadAplicada=" + cantidadAplicada + ", litrosDeAguaUtilizada=" + litrosDeAguaUtilizada + ", jornales=" + jornales + ", observaciones=" + observaciones + ", equipoDeAplicacionFitosanitaria=" + equipoDeAplicacionFitosanitaria + ", productoFitosanitario=" + productoFitosanitario + ", administrador=" + administrador + ", fresicultor=" + fresicultor + ", siembra=" + siembra + '}';
+    }
 }

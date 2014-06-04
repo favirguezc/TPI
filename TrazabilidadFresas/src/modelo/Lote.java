@@ -49,4 +49,8 @@ public class Lote implements Serializable {
         this.etiquetas = etiquetas;
     }
 
+    @Override
+    public String toString() {
+        return "Lote{" + "id=" + id + ", cosechas=" + cosechas + ", etiquetas=" + etiquetas + '}';
+    }
 }

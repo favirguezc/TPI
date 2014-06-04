@@ -56,4 +56,8 @@ public class Fresa implements Serializable {
         this.cosechas = cosechas;
     }
 
+    @Override
+    public String toString() {
+        return "Fresa{" + "id=" + id + ", especie=" + especie + ", proveedor=" + proveedor + ", cosechas=" + cosechas + '}';
+    }    
 }

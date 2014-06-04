@@ -56,4 +56,8 @@ public class TrampaDeInsectos implements Serializable {
         this.registros = registros;
     }
 
+    @Override
+    public String toString() {
+        return "TrampaDeInsectos{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", registros=" + registros + '}';
+    }
 }

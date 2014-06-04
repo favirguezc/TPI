@@ -62,7 +62,10 @@ public abstract class Persona implements Serializable{
 
     public void setFecha_de_nacimiento(Date fecha_de_nacimiento) {
         this.fecha_de_nacimiento = fecha_de_nacimiento;
+    }  
+
+    @Override
+    public String toString() {
+        return "Persona{" + "id=" + id + ", nombres=" + nombres + ", apellidos=" + apellidos + ", cedula=" + cedula + ", fecha_de_nacimiento=" + fecha_de_nacimiento + '}';
     }
-    
-    
 }
