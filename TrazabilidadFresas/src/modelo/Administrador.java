@@ -32,5 +32,4 @@ public class Administrador extends Persona implements Serializable {
     public void setClave(String clave) {
         this.clave = clave;
     }
-
 }

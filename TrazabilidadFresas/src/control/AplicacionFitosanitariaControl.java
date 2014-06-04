@@ -42,12 +42,12 @@ public class AplicacionFitosanitariaControl {
         return dao.readAll();
     }
 
-    public List<AplicacionFitosanitaria> leerTodos(int año, int mes, int dia) {
+    public List<AplicacionFitosanitaria> leerTodos(Date fecha) {
         List<AplicacionFitosanitaria> listaDia = new ArrayList<>();
         for (AplicacionFitosanitaria a : leerTodos()) {
-            if (a.getFecha().getMonth() == mes
-                    && a.getFecha().getDay() == dia
-                    && a.getFecha().getYear() == año) {
+            if (a.getFecha().getMonth() == fecha.getMonth()
+                    && a.getFecha().getDay() == fecha.getDay()
+                    && a.getFecha().getYear() == fecha.getYear()) {
                 listaDia.add(a);
             }
         }
@@ -67,9 +67,7 @@ public class AplicacionFitosanitariaControl {
                 || f.getMotivo() == null
                 || f.getMotivo().length() < 4
                 || f.getProductoFitosanitario() == null
-                || f.getSiembra() == null
-                || f.getPc() == null
-                || f.getTr() == null) {
+                || f.getSiembra() == null) {
             return false;
         }
         return true;

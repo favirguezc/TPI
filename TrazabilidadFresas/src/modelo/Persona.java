@@ -64,5 +64,11 @@ public abstract class Persona implements Serializable{
         this.fecha_de_nacimiento = fecha_de_nacimiento;
     }
     
-    
+    @Override
+    public String toString() {
+        String primerNombre, primerApellido;
+        primerApellido = getApellidos().split(" ")[0];
+        primerNombre = getNombres().split(" ")[0];
+        return primerNombre + " " + primerApellido;
+    }
 }

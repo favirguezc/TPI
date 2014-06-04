@@ -56,5 +56,8 @@ public class EquipoDeAplicacionFitosanitaria implements Serializable{
         this.aplicaciones = aplicaciones;
     }
     
-    
+    @Override
+    public String toString(){
+        return nombre;
+    }
 }

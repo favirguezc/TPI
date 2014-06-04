@@ -90,8 +90,8 @@
                         <Column editable="true" title="Producto" type="java.lang.String"/>
                         <Column editable="true" title="Ingrediente Activo" type="java.lang.String"/>
                         <Column editable="true" title="Motivo de la aplicaci&#xf3;n" type="java.lang.String"/>
-                        <Column editable="true" title="PC" type="java.lang.String"/>
-                        <Column editable="true" title="Tr" type="java.lang.String"/>
+                        <Column editable="true" title="PC" type="java.lang.Boolean"/>
+                        <Column editable="true" title="Tr" type="java.lang.Boolean"/>
                         <Column editable="true" title="Cantidad aplicada" type="java.lang.Double"/>
                         <Column editable="true" title="Agua utilizada" type="java.lang.Double"/>
                         <Column editable="true" title="Equipo utilizado" type="java.lang.String"/>
@@ -195,6 +195,8 @@
                       <Component id="guardarButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="borrarButton" min="-2" pref="71" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="145" max="-2" attributes="0"/>
+                      <Component id="jXDatePicker1" min="-2" pref="105" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -207,6 +209,7 @@
                           <Component id="agregarButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="guardarButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="borrarButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jXDatePicker1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -238,6 +241,14 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guardarButtonActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="org.jdesktop.swingx.JXDatePicker" name="jXDatePicker1">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jXDatePicker1ActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jXDatePicker1.setDate(new Date());"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

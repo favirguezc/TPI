@@ -5,22 +5,16 @@
  */
 package interfaz;
 
-import control.AplicacionFitosanitariaControl;
-import control.EquipoDeAplicacionFitosanitariaControl;
-import control.ProductoFitosanitarioControl;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import control.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import modelo.AplicacionFitosanitaria;
-import modelo.EquipoDeAplicacionFitosanitaria;
-import modelo.ProductoFitosanitario;
-import org.jdesktop.swingx.JXDatePicker;
+import modelo.*;
 import org.jdesktop.swingx.renderer.DefaultTableRenderer;
 import org.jdesktop.swingx.renderer.FormatStringValue;
 import org.jdesktop.swingx.table.DatePickerCellEditor;
@@ -67,6 +61,7 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
         agregarButton = new javax.swing.JButton();
         borrarButton = new javax.swing.JButton();
         guardarButton = new javax.swing.JButton();
+        jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,7 +76,7 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -142,6 +137,12 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
             }
         });
 
+        jXDatePicker1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jXDatePicker1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -153,6 +154,8 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
                 .addComponent(guardarButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(borrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(145, 145, 145)
+                .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -162,9 +165,12 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(agregarButton)
                     .addComponent(guardarButton)
-                    .addComponent(borrarButton))
+                    .addComponent(borrarButton)
+                    .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jXDatePicker1.setDate(new Date());
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -232,6 +238,12 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_borrarButtonActionPerformed
 
+    private void jXDatePicker1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDatePicker1ActionPerformed
+        // TODO add your handling code here:
+        borrarTabla();
+        cargarTabla();
+    }//GEN-LAST:event_jXDatePicker1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -276,19 +288,20 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
     // End of variables declaration//GEN-END:variables
 
     private void cargarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) aplicacionesTable.getModel();
-        aplicaciones = (ArrayList) new AplicacionFitosanitariaControl().leerTodos();
+        aplicaciones = (ArrayList) new AplicacionFitosanitariaControl().leerTodos(new Date());
         for (int i = 0; i < aplicaciones.size(); i++) {
             AplicacionFitosanitaria a = (AplicacionFitosanitaria) aplicaciones.get(i);
             Object[] datos = {a.getFecha(),
                 a.getProductoFitosanitario(),
                 a.getProductoFitosanitario().getIngrediente_activo(),
                 a.getMotivo(),
-                a.getPc(),
-                a.getTr(),
+                a.isPc(),
+                a.isTr(),
                 a.getCantidadAplicada(),
                 a.getLitrosDeAguaUtilizada(),
                 a.getEquipoDeAplicacionFitosanitaria(),
@@ -305,9 +318,11 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
         while (modelo.getRowCount() > 0) {
             modelo.removeRow(0);
         }
+        editing = false;
     }
 
     private void setCellEditors() {
+        //ComboBox de producto fitosanitario
         TableColumn productoColumn = aplicacionesTable.getColumnModel().getColumn(1);
         JComboBox comboBox = new JComboBox();
         comboBox.addItemListener(new ItemListener() {
@@ -327,17 +342,34 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
             comboBox.addItem(pf);
         }
         productoColumn.setCellEditor(new DefaultCellEditor(comboBox));
-
+        //DatePicker de fecha
         productoColumn = aplicacionesTable.getColumnModel().getColumn(0);
         DatePickerCellEditor picker = new DatePickerCellEditor();
         picker.setClickCountToStart(-1);
         productoColumn.setCellEditor(picker);
         productoColumn.setCellRenderer(new DefaultTableRenderer(stringValue, JLabel.RIGHT));
-
+        //CheckBox de pc
+        productoColumn = aplicacionesTable.getColumnModel().getColumn(4);
+        productoColumn.setCellEditor(new DefaultCellEditor(new JCheckBox()));
+        //ComboBox de equipos de aplicacion fitosanitaria
         productoColumn = aplicacionesTable.getColumnModel().getColumn(8);
         comboBox = new JComboBox();
         for (EquipoDeAplicacionFitosanitaria eaf : new EquipoDeAplicacionFitosanitariaControl().leerTodos()) {
             comboBox.addItem(eaf);
+        }
+        productoColumn.setCellEditor(new DefaultCellEditor(comboBox));
+        //ComboBox de responsable
+        productoColumn = aplicacionesTable.getColumnModel().getColumn(9);
+        comboBox = new JComboBox();
+        for (Fresicultor f : new FresicultorControl().leerTodos()) {
+            comboBox.addItem(f);
+        }
+        productoColumn.setCellEditor(new DefaultCellEditor(comboBox));
+        //ComboBox de autorizado
+        productoColumn = aplicacionesTable.getColumnModel().getColumn(10);
+        comboBox = new JComboBox();
+        for (Administrador f : new AdministradorControl().leerTodos()) {
+            comboBox.addItem(f);
         }
         productoColumn.setCellEditor(new DefaultCellEditor(comboBox));
     }

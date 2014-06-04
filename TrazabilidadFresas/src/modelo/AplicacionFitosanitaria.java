@@ -18,8 +18,8 @@ public class AplicacionFitosanitaria implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private java.util.Date fecha;
     private String motivo;
-    private String pc;
-    private String tr;
+    private boolean pc;
+    private boolean tr;
     private double cantidadAplicada;
     private double litrosDeAguaUtilizada;
     private double jornales;
@@ -59,19 +59,19 @@ public class AplicacionFitosanitaria implements Serializable {
         this.motivo = motivo;
     }
 
-    public String getPc() {
+    public boolean isPc() {
         return pc;
     }
 
-    public void setPc(String pc) {
+    public void setPc(boolean pc) {
         this.pc = pc;
     }
 
-    public String getTr() {
+    public boolean isTr() {
         return tr;
     }
 
-    public void setTr(String tr) {
+    public void setTr(boolean tr) {
         this.tr = tr;
     }
 
@@ -147,5 +147,4 @@ public class AplicacionFitosanitaria implements Serializable {
         this.siembra = siembra;
     }
 
-    
 }
