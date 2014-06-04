@@ -1,6 +1,8 @@
 package modelo;
 
+import control.CustomDateFormatter;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -20,11 +22,12 @@ public class Siembra implements Serializable {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
     @ManyToOne
-    private Parcela parcela;    
-    @OneToMany(mappedBy = "siembra",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    private Parcela parcela;
+    private Date fecha;
+    @OneToMany(mappedBy = "siembra", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<AplicacionFitosanitaria> aplicaciones;
-    @OneToMany(mappedBy = "siembra",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "siembra", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Cosecha> cosechas;
 
@@ -60,8 +63,16 @@ public class Siembra implements Serializable {
         this.cosechas = cosechas;
     }
 
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
     @Override
     public String toString() {
-        return "Siembra{" + ", parcela=" + parcela + ", aplicaciones=" + aplicaciones + ", cosechas=" + cosechas + '}';
+        return id + " " + new CustomDateFormatter().formatDate(fecha);
     }
 }

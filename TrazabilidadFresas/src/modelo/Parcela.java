@@ -76,6 +76,6 @@ public class Parcela implements Serializable {
 
     @Override
     public String toString() {
-        return "Parcela{" + ", ubicacion_en_la_finca=" + ubicacion_en_la_finca + ", area=" + area + ", tipo_de_suelo=" + tipo_de_suelo + ", activa=" + activa + ", siembras=" + siembras + '}';
+        return ubicacion_en_la_finca + " " + area + " " + tipo_de_suelo;
     }
 }

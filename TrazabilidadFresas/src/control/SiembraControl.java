@@ -8,6 +8,7 @@ package control;
 
 import dao.SiembraDAO;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import modelo.Siembra;
 
@@ -44,7 +45,8 @@ public class SiembraControl {
     
     private boolean validar(Siembra s) {        
         if (s.getParcela() == null
-                || s.getId() < 0) {
+                || s.getId() < 0
+                || s.getFecha().after(new Date())) {
             return false;
         }
         if (s.getAplicaciones() == null) {

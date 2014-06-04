@@ -8,7 +8,6 @@ package interfaz;
 import control.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.*;
@@ -16,7 +15,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import modelo.*;
 import org.jdesktop.swingx.renderer.DefaultTableRenderer;
-import org.jdesktop.swingx.renderer.FormatStringValue;
 import org.jdesktop.swingx.table.DatePickerCellEditor;
 
 /**
@@ -31,8 +29,6 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
     private boolean editing = false;
     private int filaEditable = -1;
     private ArrayList aplicaciones;
-    private final SimpleDateFormat sdf_brief = new SimpleDateFormat("dd/MM/yy");
-    private final FormatStringValue stringValue = new FormatStringValue(sdf_brief);
 
     public CRUDAplicacionFitosanitariaGUI() {
 
@@ -62,6 +58,7 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
         borrarButton = new javax.swing.JButton();
         guardarButton = new javax.swing.JButton();
         jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
+        jCheckBox1 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,11 +69,11 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Fecha", "Producto", "Ingrediente Activo", "Motivo de la aplicación", "PC", "Tr", "Cantidad aplicada", "Agua utilizada", "Equipo utilizado", "Responsable", "Autorizado", "Jornales", "Observaciones"
+                "Fecha", "Siembra", "Producto", "Ingrediente Activo", "Motivo de la aplicación", "PC", "Tr", "Cantidad aplicada", "Agua utilizada", "Equipo utilizado", "Responsable", "Autorizado", "Jornales", "Observaciones"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -88,21 +85,6 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
         aplicacionesTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(aplicacionesTable);
         aplicacionesTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        if (aplicacionesTable.getColumnModel().getColumnCount() > 0) {
-            aplicacionesTable.getColumnModel().getColumn(0).setResizable(false);
-            aplicacionesTable.getColumnModel().getColumn(1).setResizable(false);
-            aplicacionesTable.getColumnModel().getColumn(2).setResizable(false);
-            aplicacionesTable.getColumnModel().getColumn(3).setResizable(false);
-            aplicacionesTable.getColumnModel().getColumn(4).setResizable(false);
-            aplicacionesTable.getColumnModel().getColumn(5).setResizable(false);
-            aplicacionesTable.getColumnModel().getColumn(6).setResizable(false);
-            aplicacionesTable.getColumnModel().getColumn(7).setResizable(false);
-            aplicacionesTable.getColumnModel().getColumn(8).setResizable(false);
-            aplicacionesTable.getColumnModel().getColumn(9).setResizable(false);
-            aplicacionesTable.getColumnModel().getColumn(10).setResizable(false);
-            aplicacionesTable.getColumnModel().getColumn(11).setResizable(false);
-            aplicacionesTable.getColumnModel().getColumn(12).setResizable(false);
-        }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -143,6 +125,13 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
             }
         });
 
+        jCheckBox1.setText("Última Semana");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -156,6 +145,8 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
                 .addComponent(borrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(145, 145, 145)
                 .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCheckBox1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -166,7 +157,8 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
                     .addComponent(agregarButton)
                     .addComponent(guardarButton)
                     .addComponent(borrarButton)
-                    .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -218,11 +210,25 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
         AplicacionFitosanitaria adm = new AplicacionFitosanitaria();
         try {
             //set the variables
+            adm.setFecha((Date) aplicacionesTable.getValueAt(filaEditable, 0));
+            adm.setSiembra((Siembra) aplicacionesTable.getValueAt(filaEditable, 1));
+            adm.setProductoFitosanitario((ProductoFitosanitario) aplicacionesTable.getValueAt(filaEditable, 2));
+            adm.setMotivo((String) aplicacionesTable.getValueAt(filaEditable, 4));
+            adm.setPc((boolean) (aplicacionesTable.getValueAt(filaEditable, 5) != null && (boolean) aplicacionesTable.getValueAt(filaEditable, 4)));
+            adm.setTr((boolean) (aplicacionesTable.getValueAt(filaEditable, 6) != null && (boolean) aplicacionesTable.getValueAt(filaEditable, 5)));
+            adm.setCantidadAplicada((double) aplicacionesTable.getValueAt(filaEditable, 7));
+            adm.setLitrosDeAguaUtilizada((double) aplicacionesTable.getValueAt(filaEditable, 8));
+            adm.setEquipoDeAplicacionFitosanitaria((EquipoDeAplicacionFitosanitaria) aplicacionesTable.getValueAt(filaEditable, 9));
+            adm.setFresicultor((Fresicultor) aplicacionesTable.getValueAt(filaEditable, 10));
+            adm.setAdministrador((Administrador) aplicacionesTable.getValueAt(filaEditable, 11));
+            adm.setJornales((double) aplicacionesTable.getValueAt(filaEditable, 12));
+            adm.setObservaciones((String) aplicacionesTable.getValueAt(filaEditable, 13));
             if (!new AplicacionFitosanitariaControl().crear(adm)) {
                 throw new Exception();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error en los datos", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         }
         borrarTabla();
         cargarTabla();
@@ -243,6 +249,11 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
         borrarTabla();
         cargarTabla();
     }//GEN-LAST:event_jXDatePicker1ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+        jXDatePicker1.setEnabled(!jCheckBox1.isSelected());
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -284,6 +295,7 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
     private javax.swing.JTable aplicacionesTable;
     private javax.swing.JButton borrarButton;
     private javax.swing.JButton guardarButton;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -293,10 +305,15 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
 
     private void cargarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) aplicacionesTable.getModel();
-        aplicaciones = (ArrayList) new AplicacionFitosanitariaControl().leerTodos(new Date());
+        if (jCheckBox1.isSelected()) {
+            aplicaciones = (ArrayList) new AplicacionFitosanitariaControl().leerUltimos();
+        } else {
+            aplicaciones = (ArrayList) new AplicacionFitosanitariaControl().leerTodos(jXDatePicker1.getDate());
+        }
         for (int i = 0; i < aplicaciones.size(); i++) {
             AplicacionFitosanitaria a = (AplicacionFitosanitaria) aplicaciones.get(i);
             Object[] datos = {a.getFecha(),
+                a.getSiembra(),
                 a.getProductoFitosanitario(),
                 a.getProductoFitosanitario().getIngrediente_activo(),
                 a.getMotivo(),
@@ -323,7 +340,7 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
 
     private void setCellEditors() {
         //ComboBox de producto fitosanitario
-        TableColumn productoColumn = aplicacionesTable.getColumnModel().getColumn(1);
+        TableColumn productoColumn = aplicacionesTable.getColumnModel().getColumn(2);
         JComboBox comboBox = new JComboBox();
         comboBox.addItemListener(new ItemListener() {
             @Override
@@ -347,29 +364,33 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
         DatePickerCellEditor picker = new DatePickerCellEditor();
         picker.setClickCountToStart(-1);
         productoColumn.setCellEditor(picker);
-        productoColumn.setCellRenderer(new DefaultTableRenderer(stringValue, JLabel.RIGHT));
-        //CheckBox de pc
-        productoColumn = aplicacionesTable.getColumnModel().getColumn(4);
-        productoColumn.setCellEditor(new DefaultCellEditor(new JCheckBox()));
+        productoColumn.setCellRenderer(new DefaultTableRenderer(new CustomDateFormatter().getStringValue(), JLabel.RIGHT));
         //ComboBox de equipos de aplicacion fitosanitaria
-        productoColumn = aplicacionesTable.getColumnModel().getColumn(8);
+        productoColumn = aplicacionesTable.getColumnModel().getColumn(9);
         comboBox = new JComboBox();
         for (EquipoDeAplicacionFitosanitaria eaf : new EquipoDeAplicacionFitosanitariaControl().leerTodos()) {
             comboBox.addItem(eaf);
         }
         productoColumn.setCellEditor(new DefaultCellEditor(comboBox));
         //ComboBox de responsable
-        productoColumn = aplicacionesTable.getColumnModel().getColumn(9);
+        productoColumn = aplicacionesTable.getColumnModel().getColumn(10);
         comboBox = new JComboBox();
         for (Fresicultor f : new FresicultorControl().leerTodos()) {
             comboBox.addItem(f);
         }
         productoColumn.setCellEditor(new DefaultCellEditor(comboBox));
         //ComboBox de autorizado
-        productoColumn = aplicacionesTable.getColumnModel().getColumn(10);
+        productoColumn = aplicacionesTable.getColumnModel().getColumn(11);
         comboBox = new JComboBox();
         for (Administrador f : new AdministradorControl().leerTodos()) {
             comboBox.addItem(f);
+        }
+        productoColumn.setCellEditor(new DefaultCellEditor(comboBox));
+        //ComboBox de siembra
+        productoColumn = aplicacionesTable.getColumnModel().getColumn(1);
+        comboBox = new JComboBox();
+        for (Siembra s : new SiembraControl().leerTodos()) {
+            comboBox.addItem(s);
         }
         productoColumn.setCellEditor(new DefaultCellEditor(comboBox));
     }

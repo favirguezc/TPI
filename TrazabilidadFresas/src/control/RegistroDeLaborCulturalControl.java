@@ -34,8 +34,7 @@ public class RegistroDeLaborCulturalControl {
     }
     
     public RegistroDeLaborCultural leer(long id) {
-        RegistroDeLaborCultural r = dao.read(id);
-        return r;
+        return dao.read(id);
     }
     
     public List<RegistroDeLaborCultural> leerTodos() {
@@ -48,8 +47,7 @@ public class RegistroDeLaborCulturalControl {
                 || r.getId() < 0
                 || r.getJornales() < 0
                 || r.getFresicultor() == null
-                || r.getLaborCultural() == null
-                || r.getObservaciones() == null) {
+                || r.getLaborCultural() == null) {
             return false;
         }
         return true;

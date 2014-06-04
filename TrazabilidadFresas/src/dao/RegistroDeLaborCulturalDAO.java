@@ -59,8 +59,7 @@ public class RegistroDeLaborCulturalDAO {
         EntityManager em = emf.createEntityManager();
         ArrayList r = new ArrayList();
         try {
-            r = (ArrayList) em.createQuery("SELECT rc FROM RegistroDeLaborCultural rp",
-                    RegistroDeLaborCultural.class).getResultList();
+            r = (ArrayList) em.createQuery("SELECT rc FROM RegistroDeLaborCultural rc").getResultList();
         } catch (Exception e) {
         } finally {
             em.close();

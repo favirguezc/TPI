@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.NonUniqueResultException;
 import modelo.Siembra;
 
 /**
@@ -76,6 +75,7 @@ public class SiembraDAO {
         try {
             if (s != null) {
                 s.setCosechas(i.getCosechas());
+                s.setFecha(i.getFecha());
                 s.setParcela(i.getParcela());
                 s.setAplicaciones(i.getAplicaciones());
                 em.merge(s);
