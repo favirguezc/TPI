@@ -64,6 +64,6 @@ public class InventarioDeProductosFitosanitarios implements Serializable {
 
     @Override
     public String toString() {
-        return "InventarioDeProductosFitosanitarios{" + "id=" + id + ", cantidad=" + cantidad + ", precio=" + precio + ", fecha_de_compra=" + fecha_de_compra + ", productoFitosanitario=" + productoFitosanitario + '}';
+        return "InventarioDeProductosFitosanitarios{" + ", cantidad=" + cantidad + ", precio=" + precio + ", fecha_de_compra=" + fecha_de_compra + ", productoFitosanitario=" + productoFitosanitario + '}';
     }
 }

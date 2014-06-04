@@ -62,6 +62,6 @@ public class Siembra implements Serializable {
 
     @Override
     public String toString() {
-        return "Siembra{" + "id=" + id + ", parcela=" + parcela + ", aplicaciones=" + aplicaciones + ", cosechas=" + cosechas + '}';
+        return "Siembra{" + ", parcela=" + parcela + ", aplicaciones=" + aplicaciones + ", cosechas=" + cosechas + '}';
     }
 }

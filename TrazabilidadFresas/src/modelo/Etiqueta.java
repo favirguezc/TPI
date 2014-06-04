@@ -34,6 +34,6 @@ public class Etiqueta implements Serializable {
 
     @Override
     public String toString() {
-        return "Etiqueta{" + "id=" + id + ", lote=" + lote + '}';
+        return "Etiqueta{" + ", lote=" + lote + '}';
     }
 }

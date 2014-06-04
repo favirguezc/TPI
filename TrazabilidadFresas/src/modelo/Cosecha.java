@@ -82,6 +82,6 @@ public class Cosecha implements Serializable {
 
     @Override
     public String toString() {
-        return "Cosecha{" + "id=" + id + ", tipo=" + tipo + ", cantidad=" + cantidad + ", lote=" + lote + ", fresicultor=" + fresicultor + ", siembra=" + siembra + ", fresa=" + fresa + '}';
+        return "Cosecha{" + ", tipo=" + tipo + ", cantidad=" + cantidad + ", lote=" + lote + ", fresicultor=" + fresicultor + ", siembra=" + siembra + ", fresa=" + fresa + '}';
     }
 }

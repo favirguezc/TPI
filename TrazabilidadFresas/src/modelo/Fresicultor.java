@@ -43,9 +43,4 @@ public class Fresicultor extends Persona {
     public void setLaboresCulturales(List<RegistroDeLaborCultural> laboresCulturales) {
         this.laboresCulturales = laboresCulturales;
     }
-
-    @Override
-    public String toString() {
-        return "Fresicultor{" + super.toString() + "aplicaciones=" + aplicaciones + ", cosechas=" + cosechas + ", laboresCulturales=" + laboresCulturales + '}';
-    }
 }

@@ -79,6 +79,6 @@ public class RegistroDeTrampaDeInsectos implements Serializable {
 
     @Override
     public String toString() {
-        return "RegistroDeTrampaDeInsectos{" + "id=" + id + ", fecha=" + fecha + ", especies_encontradas=" + especies_encontradas + ", numero_de_individuos=" + numero_de_individuos + ", pegante=" + pegante + ", observaciones=" + observaciones + ", trampaDeInsectos=" + trampaDeInsectos + '}';
+        return "RegistroDeTrampaDeInsectos{" + ", fecha=" + fecha + ", especies_encontradas=" + especies_encontradas + ", numero_de_individuos=" + numero_de_individuos + ", pegante=" + pegante + ", observaciones=" + observaciones + ", trampaDeInsectos=" + trampaDeInsectos + '}';
     }
 }

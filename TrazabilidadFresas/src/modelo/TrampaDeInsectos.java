@@ -58,6 +58,6 @@ public class TrampaDeInsectos implements Serializable {
 
     @Override
     public String toString() {
-        return "TrampaDeInsectos{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", registros=" + registros + '}';
+        return nombre;
     }
 }

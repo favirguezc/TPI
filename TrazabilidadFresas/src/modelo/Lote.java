@@ -51,6 +51,6 @@ public class Lote implements Serializable {
 
     @Override
     public String toString() {
-        return "Lote{" + "id=" + id + ", cosechas=" + cosechas + ", etiquetas=" + etiquetas + '}';
+        return "Lote{" + ", cosechas=" + cosechas + ", etiquetas=" + etiquetas + '}';
     }
 }

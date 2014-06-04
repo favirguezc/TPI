@@ -58,6 +58,6 @@ public class Plaga implements Serializable {
 
     @Override
     public String toString() {
-        return "Plaga{" + "id=" + id + ", nombre=" + nombre + ", maxima_valoracion=" + maxima_valoracion + ", registros=" + registros + '}';
+        return nombre;
     }
 }

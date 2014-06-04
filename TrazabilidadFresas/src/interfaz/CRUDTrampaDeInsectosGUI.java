@@ -5,58 +5,47 @@
  */
 package interfaz;
 
-import control.AdministradorControl;
+import control.TrampaDeInsectosControl;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import modelo.Administrador;
+import modelo.TrampaDeInsectos;
 
 /**
  *
  * @author fredy
  */
-public class CRUDAdministradorGUI extends javax.swing.JFrame {
+public class CRUDTrampaDeInsectosGUI extends javax.swing.JFrame {
 
     /**
-     * Creates new form CRUDAdministradorGUI
+     * Creates new form CRUDTrampaDeInsectosGUI
      */
     private boolean editing = false;
     private int filaEditable = -1;
-    private ArrayList administradores = new ArrayList();
+    private ArrayList trampas = new ArrayList();
 
-    public CRUDAdministradorGUI() {
+    public CRUDTrampaDeInsectosGUI() {
         initComponents();
         cargarTabla();
-        administradoresTable.addMouseListener(new MouseAdapter() {
+        trampasTable.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                int fila = administradoresTable.rowAtPoint(e.getPoint());
-                int columna = administradoresTable.columnAtPoint(e.getPoint());
+                int fila = trampasTable.rowAtPoint(e.getPoint());
+                int columna = trampasTable.columnAtPoint(e.getPoint());
                 if (editing && fila > -1 && columna > -1) {
                     if (filaEditable != -1 && fila == filaEditable) {
                         String mensaje = "";
                         switch (columna) {
                             case 0:
-                                mensaje = "Ingrese el numero de cédula";
+                                mensaje = "Ingrese el nombre";
                                 break;
                             case 1:
-                                mensaje = "Ingrese los nombres";
-                                break;
-                            case 2:
-                                mensaje = "Ingrese los apellidos";
-                                break;
-                            case 3:
-                                mensaje = "Ingrese la fecha de nacimiento así: dd/mm/aaaa";
-                                break;
-                            case 4:
-                                mensaje = "Ingrese la clave";
+                                mensaje = "Ingrese la descripcion";
                                 break;
                         }
                         String m = JOptionPane.showInputDialog(mensaje);
-                        administradoresTable.setValueAt(m, fila, columna);
+                        trampasTable.setValueAt(m, fila, columna);
                     }
                 }
             }
@@ -75,7 +64,7 @@ public class CRUDAdministradorGUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        administradoresTable = new javax.swing.JTable();
+        trampasTable = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         agregarButton = new javax.swing.JButton();
         borrarButton = new javax.swing.JButton();
@@ -83,21 +72,21 @@ public class CRUDAdministradorGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Administradores"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Trampas de Insectos"));
 
-        administradoresTable.setModel(new javax.swing.table.DefaultTableModel(
+        trampasTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Cedula", "Nombres", "Apellidos", "Fecha de nacimiento", "Clave"
+                "Nombre", "Descripcion"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -108,15 +97,12 @@ public class CRUDAdministradorGUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        administradoresTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        administradoresTable.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(administradoresTable);
-        if (administradoresTable.getColumnModel().getColumnCount() > 0) {
-            administradoresTable.getColumnModel().getColumn(0).setResizable(false);
-            administradoresTable.getColumnModel().getColumn(1).setResizable(false);
-            administradoresTable.getColumnModel().getColumn(2).setResizable(false);
-            administradoresTable.getColumnModel().getColumn(3).setResizable(false);
-            administradoresTable.getColumnModel().getColumn(4).setResizable(false);
+        trampasTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        trampasTable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(trampasTable);
+        if (trampasTable.getColumnModel().getColumnCount() > 0) {
+            trampasTable.getColumnModel().getColumn(0).setResizable(false);
+            trampasTable.getColumnModel().getColumn(1).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -215,7 +201,7 @@ public class CRUDAdministradorGUI extends javax.swing.JFrame {
     private void agregarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarButtonActionPerformed
         // TODO add your handling code here:
         if (!editing) {
-            DefaultTableModel modelo = (DefaultTableModel) administradoresTable.getModel();
+            DefaultTableModel modelo = (DefaultTableModel) trampasTable.getModel();
             modelo.addRow(new Object[5]);
             filaEditable = modelo.getRowCount() - 1;
             guardarButton.setEnabled(true);
@@ -226,19 +212,11 @@ public class CRUDAdministradorGUI extends javax.swing.JFrame {
     private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
         // TODO add your handling code here:
         editing = false;
-        Administrador adm = new Administrador();
+        TrampaDeInsectos ti = new TrampaDeInsectos();
         try {
-            adm.setApellidos((String) administradoresTable.getValueAt(filaEditable, 2));
-            adm.setCedula(Long.parseLong((String) administradoresTable.getValueAt(filaEditable, 0)));
-            adm.setNombres((String) administradoresTable.getValueAt(filaEditable, 1));
-            adm.setClave((String) administradoresTable.getValueAt(filaEditable, 4));
-            SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
-            String strFecha = (String) administradoresTable.getValueAt(filaEditable, 3);
-            strFecha = strFecha.replaceAll(" ", "");
-            Date fecha = null;
-            fecha = formatoDelTexto.parse(strFecha);
-            adm.setFecha_de_nacimiento(fecha);
-            if (!new AdministradorControl().crear(adm)) {
+            ti.setNombre((String) trampasTable.getValueAt(filaEditable, 0));
+            ti.setDescripcion((String) trampasTable.getValueAt(filaEditable, 1));
+            if (!new TrampaDeInsectosControl().crear(ti)) {
                 throw new Exception();
             }
         } catch (Exception e) {
@@ -250,9 +228,9 @@ public class CRUDAdministradorGUI extends javax.swing.JFrame {
 
     private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
         // TODO add your handling code here:
-        if (administradoresTable.getSelectedRow() > -1) {
-            Administrador a = (Administrador) administradores.get(administradoresTable.getSelectedRow());
-            new AdministradorControl().eliminar(a);
+        if (trampasTable.getSelectedRow() > -1) {
+            TrampaDeInsectos t = (TrampaDeInsectos) trampas.get(trampasTable.getSelectedRow());
+            new TrampaDeInsectosControl().eliminar(t);
             borrarTabla();
             cargarTabla();
         }
@@ -275,26 +253,25 @@ public class CRUDAdministradorGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CRUDAdministradorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDTrampaDeInsectosGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CRUDAdministradorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDTrampaDeInsectosGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CRUDAdministradorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDTrampaDeInsectosGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CRUDAdministradorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDTrampaDeInsectosGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CRUDAdministradorGUI().setVisible(true);
+                new CRUDTrampaDeInsectosGUI().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable administradoresTable;
     private javax.swing.JButton agregarButton;
     private javax.swing.JButton borrarButton;
     private javax.swing.JButton guardarButton;
@@ -302,26 +279,21 @@ public class CRUDAdministradorGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable trampasTable;
     // End of variables declaration//GEN-END:variables
 
     private void cargarTabla() {
-        DefaultTableModel modelo = (DefaultTableModel) administradoresTable.getModel();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        administradores = (ArrayList) new AdministradorControl().leerTodos();
-        for (int i = 0; i < administradores.size(); i++) {
-            Administrador a = (Administrador) administradores.get(i);
-            String fecha = sdf.format(a.getFecha_de_nacimiento());
-            String clave = "";
-            for (int k = 0; k < a.getClave().length(); k++) {
-                clave += "*";
-            }
-            Object[] datos = {a.getCedula(), a.getNombres(), a.getApellidos(), fecha, clave};
+        DefaultTableModel modelo = (DefaultTableModel) trampasTable.getModel();
+        trampas = (ArrayList) new TrampaDeInsectosControl().leerTodos();
+        for (int i = 0; i < trampas.size(); i++) {
+            TrampaDeInsectos t = (TrampaDeInsectos) trampas.get(i);
+            Object[] datos = {t.getNombre(), t.getDescripcion()};
             modelo.addRow(datos);
         }
     }
 
     private void borrarTabla() {
-        DefaultTableModel modelo = (DefaultTableModel) administradoresTable.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) trampasTable.getModel();
         while (modelo.getRowCount() > 0) {
             modelo.removeRow(0);
         }

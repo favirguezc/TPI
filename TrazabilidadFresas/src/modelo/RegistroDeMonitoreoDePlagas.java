@@ -53,6 +53,6 @@ public class RegistroDeMonitoreoDePlagas implements Serializable {
 
     @Override
     public String toString() {
-        return "RegistroDeMonitoreoDePlagas{" + "id=" + id + ", plaga=" + plaga + ", valoracion=" + valoracion + ", monitoreoDePlagas=" + monitoreoDePlagas + '}';
+        return "RegistroDeMonitoreoDePlagas{" + ", plaga=" + plaga + ", valoracion=" + valoracion + ", monitoreoDePlagas=" + monitoreoDePlagas + '}';
     }
 }

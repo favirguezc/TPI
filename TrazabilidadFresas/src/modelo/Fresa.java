@@ -58,6 +58,6 @@ public class Fresa implements Serializable {
 
     @Override
     public String toString() {
-        return "Fresa{" + "id=" + id + ", especie=" + especie + ", proveedor=" + proveedor + ", cosechas=" + cosechas + '}';
+        return "Fresa{" + ", especie=" + especie + ", proveedor=" + proveedor + ", cosechas=" + cosechas + '}';
     }    
 }

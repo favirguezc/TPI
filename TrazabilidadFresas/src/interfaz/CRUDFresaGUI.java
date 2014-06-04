@@ -8,9 +8,7 @@ package interfaz;
 import control.FresaControl;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import modelo.Fresa;
@@ -19,7 +17,7 @@ import modelo.Fresa;
  *
  * @author JohnFredy
  */
-public class CRUDFresaGUI1 extends javax.swing.JFrame {
+public class CRUDFresaGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form CRUDFresaGUI
@@ -28,7 +26,7 @@ public class CRUDFresaGUI1 extends javax.swing.JFrame {
     private int filaEditable = -1;
     private ArrayList fresas = new ArrayList();
 
-    public CRUDFresaGUI1() {
+    public CRUDFresaGUI() {
         initComponents();
         cargarTabla();
         fresasTable.addMouseListener(new MouseAdapter() {
@@ -255,20 +253,20 @@ public class CRUDFresaGUI1 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CRUDFresaGUI1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDFresaGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CRUDFresaGUI1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDFresaGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CRUDFresaGUI1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDFresaGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CRUDFresaGUI1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDFresaGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CRUDFresaGUI1().setVisible(true);
+                new CRUDFresaGUI().setVisible(true);
             }
         });
     }
@@ -286,7 +284,6 @@ public class CRUDFresaGUI1 extends javax.swing.JFrame {
 
     private void cargarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) fresasTable.getModel();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         fresas = (ArrayList) new FresaControl().leerTodos();
         for (int i = 0; i < fresas.size(); i++) {
             Fresa f = (Fresa) fresas.get(i);
