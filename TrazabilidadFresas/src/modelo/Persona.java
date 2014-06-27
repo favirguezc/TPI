@@ -10,19 +10,18 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Temporal;
 
-
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class Persona implements Serializable{
+public abstract class Persona implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
-    private String nombres;
-    private String apellidos;
-    private long cedula;
+    private String nombres = "";
+    private String apellidos = "";
+    private long cedula = 0;
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fecha_de_nacimiento;
+    private Date fechadeNacimiento;
 
     public long getId() {
         return id;
@@ -56,14 +55,14 @@ public abstract class Persona implements Serializable{
         this.cedula = cedula;
     }
 
-    public Date getFecha_de_nacimiento() {
-        return fecha_de_nacimiento;
+    public Date getFechadeNacimiento() {
+        return fechadeNacimiento;
     }
 
-    public void setFecha_de_nacimiento(Date fecha_de_nacimiento) {
-        this.fecha_de_nacimiento = fecha_de_nacimiento;
-    }  
- 
+    public void setFechadeNacimiento(Date fechadeNacimiento) {
+        this.fechadeNacimiento = fechadeNacimiento;
+    }
+
     @Override
     public String toString() {
         String primerNombre, primerApellido;

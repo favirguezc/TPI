@@ -1,5 +1,6 @@
 package modelo;
 
+import control.CustomDateFormatter;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -18,7 +19,7 @@ public class InventarioDeProductosFitosanitarios implements Serializable {
     private int cantidad;
     private int precio;
     @Temporal(javax.persistence.TemporalType.DATE)
-    private java.util.Date fecha_de_compra;
+    private java.util.Date fechaDeCompra;
     @ManyToOne
     private ProductoFitosanitario productoFitosanitario;
 
@@ -46,12 +47,12 @@ public class InventarioDeProductosFitosanitarios implements Serializable {
         this.precio = precio;
     }
 
-    public Date getFecha_de_compra() {
-        return fecha_de_compra;
+    public Date getFechaDeCompra() {
+        return fechaDeCompra;
     }
 
-    public void setFecha_de_compra(Date fecha_de_compra) {
-        this.fecha_de_compra = fecha_de_compra;
+    public void setFechaDeCompra(Date fechaDeCompra) {
+        this.fechaDeCompra = fechaDeCompra;
     }
 
     public ProductoFitosanitario getProductoFitosanitario() {
@@ -64,6 +65,6 @@ public class InventarioDeProductosFitosanitarios implements Serializable {
 
     @Override
     public String toString() {
-        return "InventarioDeProductosFitosanitarios{" + ", cantidad=" + cantidad + ", precio=" + precio + ", fecha_de_compra=" + fecha_de_compra + ", productoFitosanitario=" + productoFitosanitario + '}';
+        return productoFitosanitario+" "+ cantidad+" " + precio +" " + new CustomDateFormatter().formatDate(fechaDeCompra);
     }
 }

@@ -1,11 +1,13 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
 
 @Entity
 public class RegistroDeTrampaDeInsectos implements Serializable {
@@ -13,11 +15,12 @@ public class RegistroDeTrampaDeInsectos implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
-    private int fecha;
-    private int especies_encontradas;
-    private int numero_de_individuos;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date fecha;
+    private int especieEncontrada;
+    private int numeroDeIndividuos;
     private boolean pegante;
-    private String observaciones;
+    private String observaciones="";
     @ManyToOne
     private TrampaDeInsectos trampaDeInsectos;
 
@@ -29,28 +32,28 @@ public class RegistroDeTrampaDeInsectos implements Serializable {
         this.id = id;
     }
 
-    public int getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(int fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
-    public int getEspecies_encontradas() {
-        return especies_encontradas;
+    public int getEspeciesEncontradas() {
+        return especieEncontrada;
     }
 
-    public void setEspecies_encontradas(int especies_encontradas) {
-        this.especies_encontradas = especies_encontradas;
+    public void setEspeciesEncontradas(int especiesEncontradas) {
+        this.especieEncontrada = especiesEncontradas;
     }
 
-    public int getNumero_de_individuos() {
-        return numero_de_individuos;
+    public int getNumeroDeIndividuos() {
+        return numeroDeIndividuos;
     }
 
-    public void setNumero_de_individuos(int numero_de_individuos) {
-        this.numero_de_individuos = numero_de_individuos;
+    public void setNumeroDeIndividuos(int numeroDeIndividuos) {
+        this.numeroDeIndividuos = numeroDeIndividuos;
     }
 
     public boolean isPegante() {
@@ -79,6 +82,6 @@ public class RegistroDeTrampaDeInsectos implements Serializable {
 
     @Override
     public String toString() {
-        return "RegistroDeTrampaDeInsectos{" + ", fecha=" + fecha + ", especies_encontradas=" + especies_encontradas + ", numero_de_individuos=" + numero_de_individuos + ", pegante=" + pegante + ", observaciones=" + observaciones + ", trampaDeInsectos=" + trampaDeInsectos + '}';
+        return "RegistroDeTrampaDeInsectos{" + ", fecha=" + fecha + ", especies_encontradas=" + especieEncontrada + ", numero_de_individuos=" + numeroDeIndividuos + ", pegante=" + pegante + ", observaciones=" + observaciones + ", trampaDeInsectos=" + trampaDeInsectos + '}';
     }
 }

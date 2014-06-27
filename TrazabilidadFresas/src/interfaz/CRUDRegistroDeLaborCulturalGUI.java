@@ -34,7 +34,9 @@ public class CRUDRegistroDeLaborCulturalGUI extends javax.swing.JFrame {
     private ArrayList registros = new ArrayList();
 
     public CRUDRegistroDeLaborCulturalGUI() {
-        initComponents();        
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setCellEditors();
         cargarTabla();
     }
@@ -175,7 +177,8 @@ public class CRUDRegistroDeLaborCulturalGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (!editing) {
             DefaultTableModel modelo = (DefaultTableModel) registrosTable.getModel();
-            modelo.addRow(new Object[5]);
+            Object[] fila = {new Date(),new LaborCultural(),new Fresicultor(),0,""};
+            modelo.addRow(fila);            
             filaEditable = modelo.getRowCount() - 1;
             guardarButton.setEnabled(true);
             editing = true;

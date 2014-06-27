@@ -57,8 +57,8 @@ public class AdministradorControl {
                 || f.getCedula() < 0
                 || f.getNombres() == null
                 || f.getNombres().length() < 3
-                || f.getFecha_de_nacimiento() == null
-                || f.getFecha_de_nacimiento().after(new Date())
+                || f.getFechadeNacimiento() == null
+                || f.getFechadeNacimiento().after(new Date())
                 || f.getClave() == null
                 || f.getClave().length() < 3) {
             return false;

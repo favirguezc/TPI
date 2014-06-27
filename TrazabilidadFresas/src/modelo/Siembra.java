@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -23,6 +24,7 @@ public class Siembra implements Serializable {
     private long id;
     @ManyToOne
     private Parcela parcela;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
     @OneToMany(mappedBy = "siembra", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @Fetch(value = FetchMode.SUBSELECT)

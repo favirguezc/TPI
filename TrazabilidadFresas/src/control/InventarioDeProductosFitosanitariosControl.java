@@ -44,7 +44,7 @@ public class InventarioDeProductosFitosanitariosControl {
         if (f == null
                 || f.getCantidad() <= 0
                 || f.getProductoFitosanitario() == null
-                || f.getFecha_de_compra().after(new Date())) {
+                || f.getFechaDeCompra().after(new Date())) {
             return false;
         }
         return true;

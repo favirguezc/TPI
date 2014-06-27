@@ -33,6 +33,8 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
     public CRUDAplicacionFitosanitariaGUI() {
 
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.aplicaciones = new ArrayList();
         //
         setCellEditors();
@@ -197,7 +199,10 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (!editing) {
             DefaultTableModel modelo = (DefaultTableModel) aplicacionesTable.getModel();
-            modelo.addRow(new Object[13]);
+            Object[] fila = {new Date(), null, new ProductoFitosanitario(),
+                "", "", false, false, 0.0, 0.0, new EquipoDeAplicacionFitosanitaria(),
+                new Fresicultor(), new Administrador(), 0, ""};
+            modelo.addRow(fila);
             filaEditable = modelo.getRowCount() - 1;
             guardarButton.setEnabled(true);
             editing = true;
@@ -214,8 +219,8 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
             adm.setSiembra((Siembra) aplicacionesTable.getValueAt(filaEditable, 1));
             adm.setProductoFitosanitario((ProductoFitosanitario) aplicacionesTable.getValueAt(filaEditable, 2));
             adm.setMotivo((String) aplicacionesTable.getValueAt(filaEditable, 4));
-            adm.setPc(aplicacionesTable.getValueAt(filaEditable, 5) != null && Boolean.parseBoolean((String) aplicacionesTable.getValueAt(filaEditable, 4)));
-            adm.setTr(aplicacionesTable.getValueAt(filaEditable, 6) != null &&Boolean.parseBoolean((String) aplicacionesTable.getValueAt(filaEditable, 5)));
+            adm.setPc(aplicacionesTable.getValueAt(filaEditable, 5) != null && (Boolean) aplicacionesTable.getValueAt(filaEditable, 5));
+            adm.setTr(aplicacionesTable.getValueAt(filaEditable, 6) != null && (Boolean) aplicacionesTable.getValueAt(filaEditable, 6));
             adm.setCantidadAplicada((double) aplicacionesTable.getValueAt(filaEditable, 7));
             adm.setLitrosDeAguaUtilizada((double) aplicacionesTable.getValueAt(filaEditable, 8));
             adm.setEquipoDeAplicacionFitosanitaria((EquipoDeAplicacionFitosanitaria) aplicacionesTable.getValueAt(filaEditable, 9));
@@ -228,6 +233,7 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error en los datos", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         }
         actualizarTabla();
     }//GEN-LAST:event_guardarButtonActionPerformed
@@ -312,7 +318,7 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
             Object[] datos = {a.getFecha(),
                 a.getSiembra(),
                 a.getProductoFitosanitario(),
-                a.getProductoFitosanitario().getIngrediente_activo(),
+                a.getProductoFitosanitario().getIngredienteActivo(),
                 a.getMotivo(),
                 a.isPc(),
                 a.isTr(),
@@ -346,7 +352,7 @@ public class CRUDAplicacionFitosanitariaGUI extends javax.swing.JFrame {
                         && aplicacionesTable.getSelectedRow() > -1
                         && aplicacionesTable.getSelectedColumn() > -1) {
                     Object i = arg0.getItem();
-                    aplicacionesTable.setValueAt(((ProductoFitosanitario) i).getIngrediente_activo(),
+                    aplicacionesTable.setValueAt(((ProductoFitosanitario) i).getIngredienteActivo(),
                             aplicacionesTable.getSelectedRow(),
                             aplicacionesTable.getSelectedColumn() + 1);
                 }

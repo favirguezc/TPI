@@ -46,7 +46,7 @@ public class MonitoreoDePlagasControl {
     private boolean validar(MonitoreoDePlagas m) {        
         if (m.getFecha() == null
                 || m.getFecha().after(new Date())
-                || m.getNumero_de_planta() < 0
+                || m.getNumeroDePlanta() < 0
                 || m.getId() < 0) {
             return false;
         }

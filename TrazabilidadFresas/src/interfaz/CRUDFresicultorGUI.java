@@ -30,6 +30,8 @@ public class CRUDFresicultorGUI extends javax.swing.JFrame {
 
     public CRUDFresicultorGUI() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         cargarTabla();
         administradoresTable.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -212,7 +214,8 @@ public class CRUDFresicultorGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (!editing) {
             DefaultTableModel modelo = (DefaultTableModel) administradoresTable.getModel();
-            modelo.addRow(new Object[5]);
+            Object[] fila = {0, "", "", null};
+            modelo.addRow(fila);
             filaEditable = modelo.getRowCount() - 1;
             guardarButton.setEnabled(true);
             editing = true;
@@ -232,7 +235,7 @@ public class CRUDFresicultorGUI extends javax.swing.JFrame {
             strFecha = strFecha.replaceAll(" ", "");
             Date fecha = null;
             fecha = formatoDelTexto.parse(strFecha);
-            adm.setFecha_de_nacimiento(fecha);
+            adm.setFechadeNacimiento(fecha);
             if (!new FresicultorControl().crear(adm)) {
                 throw new Exception();
             }
@@ -305,7 +308,7 @@ public class CRUDFresicultorGUI extends javax.swing.JFrame {
         administradores = (ArrayList) new FresicultorControl().leerTodos();
         for (int i = 0; i < administradores.size(); i++) {
             Fresicultor a = (Fresicultor) administradores.get(i);
-            String fecha = sdf.format(a.getFecha_de_nacimiento());
+            String fecha = sdf.format(a.getFechadeNacimiento());
             Object[] datos = {a.getCedula(), a.getNombres(), a.getApellidos(), fecha};
             modelo.addRow(datos);
         }

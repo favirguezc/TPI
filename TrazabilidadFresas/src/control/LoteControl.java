@@ -8,6 +8,7 @@ package control;
 
 import dao.LoteDAO;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import modelo.Lote;
 
@@ -43,7 +44,7 @@ public class LoteControl {
     }
     
     private boolean validar(Lote l) {        
-        if (l.getId() < 0) {
+        if (l.getId() < 0 || l.getFecha() == null || l.getFecha().after(new Date())) {
             return false;
         }
         if (l.getCosechas() == null) {

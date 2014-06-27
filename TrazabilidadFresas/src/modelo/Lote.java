@@ -1,6 +1,8 @@
 package modelo;
 
+import control.CustomDateFormatter;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -18,6 +21,8 @@ public class Lote implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date fecha;
     @OneToMany(mappedBy = "lote",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Cosecha> cosechas;
@@ -49,8 +54,16 @@ public class Lote implements Serializable {
         this.etiquetas = etiquetas;
     }
 
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
     @Override
     public String toString() {
-        return "Lote{" + ", cosechas=" + cosechas + ", etiquetas=" + etiquetas + '}';
+        return id + " " + new CustomDateFormatter().formatDate(fecha);
     }
 }

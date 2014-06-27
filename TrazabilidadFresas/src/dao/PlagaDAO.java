@@ -76,7 +76,7 @@ public class PlagaDAO {
         try {
             if (p != null) {
                 p.setNombre(i.getNombre());
-                p.setMaxima_valoracion(i.getMaxima_valoracion());
+                p.setMaximaValoracion(i.getMaximaValoracion());
                 p.setRegistros(i.getRegistros());               
                 em.merge(p);
                 em.getTransaction().commit();

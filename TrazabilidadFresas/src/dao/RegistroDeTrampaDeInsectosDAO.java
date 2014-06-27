@@ -76,9 +76,9 @@ public class RegistroDeTrampaDeInsectosDAO {
         RegistroDeTrampaDeInsectos ri = read(i.getId());
         try {
             if (ri != null) {
-                ri.setNumero_de_individuos(i.getNumero_de_individuos());
+                ri.setNumeroDeIndividuos(i.getNumeroDeIndividuos());
                 ri.setFecha(i.getFecha());
-                ri.setEspecies_encontradas(i.getEspecies_encontradas());
+                ri.setEspeciesEncontradas(i.getEspeciesEncontradas());
                 ri.setObservaciones(i.getObservaciones());
                 ri.setPegante(i.isPegante());
                 ri.setTrampaDeInsectos(i.getTrampaDeInsectos());

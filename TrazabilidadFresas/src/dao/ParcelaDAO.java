@@ -78,8 +78,8 @@ public class ParcelaDAO {
                 p.setActiva(i.isActiva());
                 p.setArea(i.getArea());
                 p.setSiembras(i.getSiembras());
-                p.setTipo_de_suelo(i.getTipo_de_suelo());
-                p.setUbicacion_en_la_finca(i.getUbicacion_en_la_finca());
+                p.setTipoDeSuelo(i.getTipoDeSuelo());
+                p.setUbicacionEnLaFinca(i.getUbicacionEnLaFinca());
                 em.merge(p);
                 em.getTransaction().commit();
             }

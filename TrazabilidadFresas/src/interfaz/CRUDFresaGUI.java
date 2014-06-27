@@ -28,6 +28,8 @@ public class CRUDFresaGUI extends javax.swing.JFrame {
 
     public CRUDFresaGUI() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         cargarTabla();
         fresasTable.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -202,7 +204,8 @@ public class CRUDFresaGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (!editing) {
             DefaultTableModel modelo = (DefaultTableModel) fresasTable.getModel();
-            modelo.addRow(new Object[5]);
+            Object[] fila = {"", ""};
+            modelo.addRow(fila);
             filaEditable = modelo.getRowCount() - 1;
             guardarButton.setEnabled(true);
             editing = true;

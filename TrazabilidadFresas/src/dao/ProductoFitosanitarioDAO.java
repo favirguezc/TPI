@@ -76,7 +76,7 @@ public class ProductoFitosanitarioDAO {
         try {
             if (pf != null) {
                 pf.setAplicaciones(i.getAplicaciones());
-                pf.setIngrediente_activo(i.getIngrediente_activo());
+                pf.setIngredienteActivo(i.getIngredienteActivo());
                 pf.setInventario(i.getInventario());
                 pf.setNombre(i.getNombre());
                 em.merge(pf);

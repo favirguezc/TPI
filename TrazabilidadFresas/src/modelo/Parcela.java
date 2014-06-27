@@ -18,9 +18,9 @@ public class Parcela implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
-    private String ubicacion_en_la_finca;
+    private String ubicacionEnLaFinca = "";
     private double area;
-    private String tipo_de_suelo;
+    private String tipoDeSuelo = "";
     private boolean activa;
     @OneToMany(mappedBy = "parcela", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @Fetch(value = FetchMode.SUBSELECT)
@@ -34,12 +34,12 @@ public class Parcela implements Serializable {
         this.id = id;
     }
 
-    public String getUbicacion_en_la_finca() {
-        return ubicacion_en_la_finca;
+    public String getUbicacionEnLaFinca() {
+        return ubicacionEnLaFinca;
     }
 
-    public void setUbicacion_en_la_finca(String ubicacion_en_la_finca) {
-        this.ubicacion_en_la_finca = ubicacion_en_la_finca;
+    public void setUbicacionEnLaFinca(String ubicacionEnLaFinca) {
+        this.ubicacionEnLaFinca = ubicacionEnLaFinca;
     }
 
     public double getArea() {
@@ -50,12 +50,12 @@ public class Parcela implements Serializable {
         this.area = area;
     }
 
-    public String getTipo_de_suelo() {
-        return tipo_de_suelo;
+    public String getTipoDeSuelo() {
+        return tipoDeSuelo;
     }
 
-    public void setTipo_de_suelo(String tipo_de_suelo) {
-        this.tipo_de_suelo = tipo_de_suelo;
+    public void setTipoDeSuelo(String tipo_de_suelo) {
+        this.tipoDeSuelo = tipo_de_suelo;
     }
 
     public boolean isActiva() {
@@ -76,6 +76,6 @@ public class Parcela implements Serializable {
 
     @Override
     public String toString() {
-        return ubicacion_en_la_finca + " " + area + " " + tipo_de_suelo;
+        return ubicacionEnLaFinca + " " + area + " " + tipoDeSuelo;
     }
 }

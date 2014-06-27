@@ -17,7 +17,7 @@ public class RegistroDeLaborCultural implements Serializable {
     private long id;
     @Temporal(javax.persistence.TemporalType.DATE)
     private java.util.Date fecha;
-    private String observaciones;
+    private String observaciones="";
     private double jornales;
     @ManyToOne
     private Fresicultor fresicultor;

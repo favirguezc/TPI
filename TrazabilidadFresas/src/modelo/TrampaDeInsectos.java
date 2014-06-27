@@ -18,8 +18,8 @@ public class TrampaDeInsectos implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
-    private String nombre;
-    private String descripcion;
+    private String nombre="";
+    private String descripcion="";
     @OneToMany(mappedBy = "trampaDeInsectos",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<RegistroDeTrampaDeInsectos> registros;

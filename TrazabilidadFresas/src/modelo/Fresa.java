@@ -18,8 +18,8 @@ public class Fresa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
-    private String especie;
-    private String proveedor;
+    private String especie = "";
+    private String proveedor = "";
     @OneToMany(mappedBy = "fresa",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Cosecha> cosechas;

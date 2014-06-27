@@ -9,6 +9,7 @@ import control.LaborCulturalControl;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.LaborCultural;
@@ -28,6 +29,8 @@ public class CRUDLaborCulturalGUI extends javax.swing.JFrame {
 
     public CRUDLaborCulturalGUI() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         cargarTabla();
         laboresCulturalesTable.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -199,7 +202,8 @@ public class CRUDLaborCulturalGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (!editing) {
             DefaultTableModel modelo = (DefaultTableModel) laboresCulturalesTable.getModel();
-            modelo.addRow(new Object[5]);
+            Object[] fila = {"", ""};
+            modelo.addRow(fila);
             filaEditable = modelo.getRowCount() - 1;
             guardarButton.setEnabled(true);
             editing = true;

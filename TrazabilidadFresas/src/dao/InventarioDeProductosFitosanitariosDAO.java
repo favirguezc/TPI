@@ -74,7 +74,7 @@ public class InventarioDeProductosFitosanitariosDAO {
         try {
             if (f != null) {
                 f.setCantidad(i.getCantidad());
-                f.setFecha_de_compra(i.getFecha_de_compra());
+                f.setFechaDeCompra(i.getFechaDeCompra());
                 f.setPrecio(i.getPrecio());
                 f.setProductoFitosanitario(i.getProductoFitosanitario());
                 em.merge(f);

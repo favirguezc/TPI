@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.NonUniqueResultException;
 import modelo.Lote;
 
 /**
@@ -77,6 +76,7 @@ public class LoteDAO {
             if (l != null) {
                 l.setCosechas(i.getCosechas());
                 l.setEtiquetas(i.getEtiquetas());
+                l.setFecha(i.getFecha());
                 em.merge(l);
                 em.getTransaction().commit();
             }

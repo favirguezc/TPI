@@ -51,7 +51,7 @@ public class PlagaControl {
         if (p.getNombre() == null
                 || p.getNombre().length() < 3
                 || p.getId() < 0
-                || p.getMaxima_valoracion() < 0) {
+                || p.getMaximaValoracion() < 0) {
             return false;
         }
         if (p.getRegistros() == null) {

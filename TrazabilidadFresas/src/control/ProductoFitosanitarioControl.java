@@ -46,7 +46,7 @@ public class ProductoFitosanitarioControl {
         if (p.getNombre()== null
                 || p.getNombre().length() < 3
                 || p.getId() < 0
-                || p.getIngrediente_activo()== null) {
+                || p.getIngredienteActivo()== null) {
             return false;
         }
         if (p.getAplicaciones() == null) {

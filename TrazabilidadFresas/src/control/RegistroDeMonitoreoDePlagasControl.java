@@ -44,7 +44,7 @@ public class RegistroDeMonitoreoDePlagasControl {
         if (r.getMonitoreoDePlagas() == null
                 || r.getValoracion() < 0 //No se si valorizacion puede ser menor que cero
                 || r.getPlaga() == null
-                || r.getValoracion() > r.getPlaga().getMaxima_valoracion()) {
+                || r.getValoracion() > r.getPlaga().getMaximaValoracion()) {
             return false;
         }
         for (RegistroDeMonitoreoDePlagas rmp : leerTodos()) {

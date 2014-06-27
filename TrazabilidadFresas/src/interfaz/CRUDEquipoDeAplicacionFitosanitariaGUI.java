@@ -9,6 +9,7 @@ import control.EquipoDeAplicacionFitosanitariaControl;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.EquipoDeAplicacionFitosanitaria;
@@ -28,6 +29,8 @@ public class CRUDEquipoDeAplicacionFitosanitariaGUI extends javax.swing.JFrame {
 
     public CRUDEquipoDeAplicacionFitosanitariaGUI() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         cargarTabla();
         equipoDeAplicacionesFitosanitariasTable.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -72,7 +75,7 @@ public class CRUDEquipoDeAplicacionFitosanitariaGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Labores Culturales"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Equipos"));
 
         agregarButton.setText("Agregar");
         agregarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -199,7 +202,8 @@ public class CRUDEquipoDeAplicacionFitosanitariaGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (!editing) {
             DefaultTableModel modelo = (DefaultTableModel) equipoDeAplicacionesFitosanitariasTable.getModel();
-            modelo.addRow(new Object[5]);
+            Object[] fila = {"", ""};
+            modelo.addRow(fila);
             filaEditable = modelo.getRowCount() - 1;
             guardarButton.setEnabled(true);
             editing = true;

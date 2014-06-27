@@ -9,6 +9,7 @@ import control.ParcelaControl;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Parcela;
@@ -28,6 +29,8 @@ public class CRUDParcelaGUI extends javax.swing.JFrame {
 
     public CRUDParcelaGUI() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         cargarTabla();
         parcelasTable.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -91,7 +94,7 @@ public class CRUDParcelaGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Labores Culturales"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Parcelas"));
 
         agregarButton.setText("Agregar");
         agregarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -220,7 +223,8 @@ public class CRUDParcelaGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (!editing) {
             DefaultTableModel modelo = (DefaultTableModel) parcelasTable.getModel();
-            modelo.addRow(new Object[5]);
+            Object[] fila = {"", 0, "", false};
+            modelo.addRow(fila);
             filaEditable = modelo.getRowCount() - 1;
             guardarButton.setEnabled(true);
             editing = true;
@@ -243,9 +247,9 @@ public class CRUDParcelaGUI extends javax.swing.JFrame {
         editing = false;
         Parcela p = new Parcela();
         try {
-            p.setUbicacion_en_la_finca((String) parcelasTable.getValueAt(filaEditable, 0));
+            p.setUbicacionEnLaFinca((String) parcelasTable.getValueAt(filaEditable, 0));
             p.setArea((double) parcelasTable.getValueAt(filaEditable, 1));
-            p.setTipo_de_suelo((String) parcelasTable.getValueAt(filaEditable, 2));
+            p.setTipoDeSuelo((String) parcelasTable.getValueAt(filaEditable, 2));
             p.setActiva(parcelasTable.getValueAt(filaEditable, 3).equals("Si"));
             if (!new ParcelaControl().crear(p)) {
                 throw new Exception();
@@ -319,7 +323,7 @@ public class CRUDParcelaGUI extends javax.swing.JFrame {
             } else {
                 m = "No";
             }
-            Object[] datos = {a.getUbicacion_en_la_finca(), a.getArea(), a.getTipo_de_suelo(), m};
+            Object[] datos = {a.getUbicacionEnLaFinca(), a.getArea(), a.getTipoDeSuelo(), m};
             modelo.addRow(datos);
         }
     }

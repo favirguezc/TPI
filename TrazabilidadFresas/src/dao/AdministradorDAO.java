@@ -73,7 +73,7 @@ public class AdministradorDAO {
             if (f != null) {
                 f.setNombres(i.getNombres());
                 f.setApellidos(i.getApellidos());
-                f.setFecha_de_nacimiento(i.getFecha_de_nacimiento());
+                f.setFechadeNacimiento(i.getFechadeNacimiento());
                 em.merge(f);
                 em.getTransaction().commit();
             }

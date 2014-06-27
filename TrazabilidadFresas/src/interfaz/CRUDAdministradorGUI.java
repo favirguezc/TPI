@@ -30,6 +30,8 @@ public class CRUDAdministradorGUI extends javax.swing.JFrame {
 
     public CRUDAdministradorGUI() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         cargarTabla();
         administradoresTable.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -216,7 +218,8 @@ public class CRUDAdministradorGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (!editing) {
             DefaultTableModel modelo = (DefaultTableModel) administradoresTable.getModel();
-            modelo.addRow(new Object[5]);
+            Object[] fila = {0, "", "", null, ""};
+            modelo.addRow(fila);
             filaEditable = modelo.getRowCount() - 1;
             guardarButton.setEnabled(true);
             editing = true;
@@ -237,7 +240,7 @@ public class CRUDAdministradorGUI extends javax.swing.JFrame {
             strFecha = strFecha.replaceAll(" ", "");
             Date fecha = null;
             fecha = formatoDelTexto.parse(strFecha);
-            adm.setFecha_de_nacimiento(fecha);
+            adm.setFechadeNacimiento(fecha);
             if (!new AdministradorControl().crear(adm)) {
                 throw new Exception();
             }
@@ -310,7 +313,7 @@ public class CRUDAdministradorGUI extends javax.swing.JFrame {
         administradores = (ArrayList) new AdministradorControl().leerTodos();
         for (int i = 0; i < administradores.size(); i++) {
             Administrador a = (Administrador) administradores.get(i);
-            String fecha = sdf.format(a.getFecha_de_nacimiento());
+            String fecha = sdf.format(a.getFechadeNacimiento());
             String clave = "";
             for (int k = 0; k < a.getClave().length(); k++) {
                 clave += "*";

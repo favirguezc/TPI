@@ -22,8 +22,8 @@ public class MonitoreoDePlagas implements Serializable {
     private long id;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
-    private int numero_de_planta;
-    @OneToMany(mappedBy = "monitoreoDePlagas",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    private int numeroDePlanta;
+    @OneToMany(mappedBy = "monitoreoDePlagas", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<RegistroDeMonitoreoDePlagas> registros;
 
@@ -43,12 +43,12 @@ public class MonitoreoDePlagas implements Serializable {
         this.fecha = fecha;
     }
 
-    public int getNumero_de_planta() {
-        return numero_de_planta;
+    public int getNumeroDePlanta() {
+        return numeroDePlanta;
     }
 
-    public void setNumero_de_planta(int numero_de_planta) {
-        this.numero_de_planta = numero_de_planta;
+    public void setNumeroDePlanta(int numeroDePlanta) {
+        this.numeroDePlanta = numeroDePlanta;
     }
 
     public List<RegistroDeMonitoreoDePlagas> getRegistros() {
@@ -61,6 +61,6 @@ public class MonitoreoDePlagas implements Serializable {
 
     @Override
     public String toString() {
-        return "MonitoreoDePlagas{" + "id=" + id + ", fecha=" + fecha + ", numero_de_planta=" + numero_de_planta + ", registros=" + registros + '}';
+        return "MonitoreoDePlagas{" + "id=" + id + ", fecha=" + fecha + ", numero_de_planta=" + numeroDePlanta + ", registros=" + registros + '}';
     }
 }

@@ -18,8 +18,8 @@ public class ProductoFitosanitario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
-    private String nombre;
-    private String ingrediente_activo;
+    private String nombre = "";
+    private String ingredienteActivo = "";
     @OneToMany(mappedBy = "productoFitosanitario", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<InventarioDeProductosFitosanitarios> inventario;
@@ -43,12 +43,12 @@ public class ProductoFitosanitario implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getIngrediente_activo() {
-        return ingrediente_activo;
+    public String getIngredienteActivo() {
+        return ingredienteActivo;
     }
 
-    public void setIngrediente_activo(String ingrediente_activo) {
-        this.ingrediente_activo = ingrediente_activo;
+    public void setIngredienteActivo(String ingredienteActivo) {
+        this.ingredienteActivo = ingredienteActivo;
     }
 
     public List<InventarioDeProductosFitosanitarios> getInventario() {

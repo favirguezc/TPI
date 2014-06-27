@@ -23,7 +23,7 @@ public class AplicacionFitosanitaria implements Serializable {
     private double cantidadAplicada;
     private double litrosDeAguaUtilizada;
     private double jornales;
-    private String observaciones;
+    private String observaciones = "";
     @ManyToOne
     private EquipoDeAplicacionFitosanitaria equipoDeAplicacionFitosanitaria;
     @ManyToOne

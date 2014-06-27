@@ -7,6 +7,7 @@
 package control;
 
 import dao.RegistroDeTrampaDeInsectosDAO;
+import java.util.Date;
 import java.util.List;
 import modelo.RegistroDeTrampaDeInsectos;
 
@@ -43,9 +44,9 @@ public class RegistroDeTrampaDeInsectosControl {
     
     private boolean validar(RegistroDeTrampaDeInsectos r) {        
         if (r.getObservaciones() == null
-                || r.getEspecies_encontradas() < 0
-                || r.getFecha()< 0
-                || r.getNumero_de_individuos()< 0
+                || r.getEspeciesEncontradas() < 0
+                || r.getFecha().after(new Date())
+                || r.getNumeroDeIndividuos()< 0
                 || r.getId() < 0
                 || r.getTrampaDeInsectos() == null) {
             return false;

@@ -28,6 +28,8 @@ public class CRUDPlagaGUI extends javax.swing.JFrame {
 
     public CRUDPlagaGUI() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         cargarTabla();
         plagasTable.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -202,7 +204,8 @@ public class CRUDPlagaGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (!editing) {
             DefaultTableModel modelo = (DefaultTableModel) plagasTable.getModel();
-            modelo.addRow(new Object[5]);
+            Object[] fila = {"", 0};
+            modelo.addRow(fila);
             filaEditable = modelo.getRowCount() - 1;
             guardarButton.setEnabled(true);
             editing = true;
@@ -215,7 +218,7 @@ public class CRUDPlagaGUI extends javax.swing.JFrame {
         Plaga p = new Plaga();
         try {
             p.setNombre((String) plagasTable.getValueAt(filaEditable, 0));
-            p.setMaxima_valoracion(Integer.parseInt((String) plagasTable.getValueAt(filaEditable, 1)));
+            p.setMaximaValoracion(Integer.parseInt((String) plagasTable.getValueAt(filaEditable, 1)));
             if (!new PlagaControl().crear(p)) {
                 throw new Exception();
             }
@@ -287,7 +290,7 @@ public class CRUDPlagaGUI extends javax.swing.JFrame {
         plagas = (ArrayList) new PlagaControl().leerTodos();
         for (int i = 0; i < plagas.size(); i++) {
             Plaga p = (Plaga) plagas.get(i);
-            Object[] datos = {p.getNombre(), p.getMaxima_valoracion()};
+            Object[] datos = {p.getNombre(), p.getMaximaValoracion()};
             modelo.addRow(datos);
         }
     }

@@ -9,6 +9,7 @@ import control.ProductoFitosanitarioControl;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.ProductoFitosanitario;
@@ -28,6 +29,8 @@ public class CRUDProductoFitosanitarioGUI extends javax.swing.JFrame {
 
     public CRUDProductoFitosanitarioGUI() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         cargarTabla();
         productosFitosanitariosTable.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -199,7 +202,8 @@ public class CRUDProductoFitosanitarioGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (!editing) {
             DefaultTableModel modelo = (DefaultTableModel) productosFitosanitariosTable.getModel();
-            modelo.addRow(new Object[5]);
+            Object[] fila = {"", ""};
+            modelo.addRow(fila);
             filaEditable = modelo.getRowCount() - 1;
             guardarButton.setEnabled(true);
             editing = true;
@@ -223,7 +227,7 @@ public class CRUDProductoFitosanitarioGUI extends javax.swing.JFrame {
         ProductoFitosanitario lc = new ProductoFitosanitario();
         try {
             lc.setNombre((String) productosFitosanitariosTable.getValueAt(filaEditable, 0));
-            lc.setIngrediente_activo((String) productosFitosanitariosTable.getValueAt(filaEditable, 1));
+            lc.setIngredienteActivo((String) productosFitosanitariosTable.getValueAt(filaEditable, 1));
             if (!new ProductoFitosanitarioControl().crear(lc)) {
                 throw new Exception();
             }
@@ -285,7 +289,7 @@ public class CRUDProductoFitosanitarioGUI extends javax.swing.JFrame {
         productosFitosanitarios = (ArrayList) new ProductoFitosanitarioControl().leerTodos();
         for (int i = 0; i < productosFitosanitarios.size(); i++) {
             ProductoFitosanitario a = (ProductoFitosanitario) productosFitosanitarios.get(i);
-            String[] datos = {a.getNombre(), a.getIngrediente_activo()};
+            String[] datos = {a.getNombre(), a.getIngredienteActivo()};
             modelo.addRow(datos);
         }
     }

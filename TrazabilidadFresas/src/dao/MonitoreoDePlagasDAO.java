@@ -76,7 +76,7 @@ public class MonitoreoDePlagasDAO {
         try {
             if (m != null) {
                 m.setFecha(i.getFecha());
-                m.setNumero_de_planta(i.getNumero_de_planta());
+                m.setNumeroDePlanta(i.getNumeroDePlanta());
                 m.setRegistros(i.getRegistros());
                 em.merge(m);
                 em.getTransaction().commit();
