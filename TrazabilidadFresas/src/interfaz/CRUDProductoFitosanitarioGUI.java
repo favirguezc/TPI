@@ -71,12 +71,18 @@ public class CRUDProductoFitosanitarioGUI extends javax.swing.JFrame {
         guardarButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         productosFitosanitariosTable = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Productos Fitosanitarios"));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Productos Fitosanitarios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(0, 0, 153))); // NOI18N
 
+        jPanel3.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, new java.awt.Color(204, 204, 255)));
+        jPanel3.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+
+        agregarButton.setBackground(new java.awt.Color(153, 153, 255));
+        agregarButton.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         agregarButton.setText("Agregar");
         agregarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,6 +90,8 @@ public class CRUDProductoFitosanitarioGUI extends javax.swing.JFrame {
             }
         });
 
+        borrarButton.setBackground(new java.awt.Color(153, 153, 255));
+        borrarButton.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         borrarButton.setText("Borrar");
         borrarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,6 +99,8 @@ public class CRUDProductoFitosanitarioGUI extends javax.swing.JFrame {
             }
         });
 
+        guardarButton.setBackground(new java.awt.Color(153, 153, 255));
+        guardarButton.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         guardarButton.setText("Guardar");
         guardarButton.setEnabled(false);
         guardarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -99,6 +109,11 @@ public class CRUDProductoFitosanitarioGUI extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane1.setBackground(new java.awt.Color(204, 204, 255));
+        jScrollPane1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+
+        productosFitosanitariosTable.setBackground(new java.awt.Color(204, 204, 255));
+        productosFitosanitariosTable.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         productosFitosanitariosTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -158,30 +173,17 @@ public class CRUDProductoFitosanitarioGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -278,7 +280,6 @@ public class CRUDProductoFitosanitarioGUI extends javax.swing.JFrame {
     private javax.swing.JButton borrarButton;
     private javax.swing.JButton guardarButton;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable productosFitosanitariosTable;

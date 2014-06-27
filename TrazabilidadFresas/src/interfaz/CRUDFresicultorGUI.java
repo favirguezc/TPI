@@ -82,8 +82,18 @@ public class CRUDFresicultorGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Fresicultores"));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fresicultores", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(0, 0, 153))); // NOI18N
 
+        jPanel2.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, new java.awt.Color(204, 204, 255)));
+        jPanel2.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+
+        jScrollPane1.setBackground(new java.awt.Color(204, 204, 255));
+        jScrollPane1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+
+        administradoresTable.setBackground(new java.awt.Color(204, 204, 255));
+        administradoresTable.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         administradoresTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -130,6 +140,12 @@ public class CRUDFresicultorGUI extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        jPanel3.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, new java.awt.Color(204, 204, 255)));
+        jPanel3.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+
+        agregarButton.setBackground(new java.awt.Color(153, 153, 255));
+        agregarButton.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         agregarButton.setText("Agregar");
         agregarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,6 +153,8 @@ public class CRUDFresicultorGUI extends javax.swing.JFrame {
             }
         });
 
+        borrarButton.setBackground(new java.awt.Color(153, 153, 255));
+        borrarButton.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         borrarButton.setText("Borrar");
         borrarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,6 +162,8 @@ public class CRUDFresicultorGUI extends javax.swing.JFrame {
             }
         });
 
+        guardarButton.setBackground(new java.awt.Color(153, 153, 255));
+        guardarButton.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         guardarButton.setText("Guardar");
         guardarButton.setEnabled(false);
         guardarButton.addActionListener(new java.awt.event.ActionListener() {
